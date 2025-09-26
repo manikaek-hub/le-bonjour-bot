@@ -138,8 +138,8 @@ const ContactSection = () => {
                   />
                 </div>
                 
-                <Button variant="ocean" size="lg" className="w-full">
-                  Envoyer la Demande
+                <Button variant="ocean" size="lg" className="w-full animate-pulse-glow">
+                  📞 Envoyer ma Demande de Réservation
                 </Button>
               </form>
             </CardContent>

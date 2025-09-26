@@ -26,7 +26,7 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button variant="ocean" size="xl" className="min-w-[200px]">
+          <Button variant="ocean" size="xl" className="min-w-[200px] animate-pulse-glow">
             Réserver Maintenant
           </Button>
           <Button variant="coastal" size="xl" className="min-w-[200px]">

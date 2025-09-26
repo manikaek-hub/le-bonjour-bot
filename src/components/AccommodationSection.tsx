@@ -148,8 +148,8 @@ const AccommodationSection = () => {
               </div>
             </div>
             
-            <Button variant="ocean" size="lg" className="w-full md:w-auto">
-              Voir les Disponibilités
+            <Button variant="ocean" size="lg" className="w-full md:w-auto animate-pulse-glow">
+              🏖️ Réserver Maintenant
             </Button>
           </div>
         </div>
