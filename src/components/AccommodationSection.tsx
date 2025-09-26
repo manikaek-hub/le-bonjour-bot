@@ -5,6 +5,11 @@ import bedroomLoft from "@/assets/bedroom-loft.jpg";
 import livingRoom from "@/assets/living-room.jpg";
 import kitchenView from "@/assets/kitchen-view.jpg";
 import kitchenDining from "@/assets/kitchen-dining.jpg";
+import livingRoomFireplace from "@/assets/living-room-fireplace.jpg";
+import entranceTiles from "@/assets/entrance-tiles.jpg";
+import bedroomMultiple from "@/assets/bedroom-multiple.jpg";
+import fireplaceDetail from "@/assets/fireplace-detail.jpg";
+import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -16,7 +21,12 @@ const AccommodationSection = () => {
     { src: bedroomLoft, alt: "Chambre sous les combles" },
     { src: livingRoom, alt: "Salon avec mur bleu canard" },
     { src: kitchenView, alt: "Vue sur la cuisine moderne" },
-    { src: kitchenDining, alt: "Cuisine et salle à manger" }
+    { src: kitchenDining, alt: "Cuisine et salle à manger" },
+    { src: livingRoomFireplace, alt: "Salon avec cheminée" },
+    { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" },
+    { src: bedroomMultiple, alt: "Chambre avec lits multiples" },
+    { src: fireplaceDetail, alt: "Détail de la cheminée normande" },
+    { src: seaViewFermanville, alt: "Vue sur la mer à Fermanville" }
   ];
 
   const nextImage = () => {
