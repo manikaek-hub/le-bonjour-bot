@@ -57,13 +57,29 @@ export default function UserReservations() {
   }, [user]);
 
   const fetchReservations = async () => {
+    if (!user) {
+      console.log("Pas d'utilisateur connecté");
+      setLoading(false);
+      return;
+    }
+
+    console.log("Chargement des réservations pour l'utilisateur:", user.id);
+    
     try {
       const { data, error } = await supabase
         .from("reservations")
         .select("*")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      console.log("Réponse Supabase:", { data, error });
+
+      if (error) {
+        console.error("Erreur Supabase:", error);
+        throw error;
+      }
+      
+      console.log("Réservations trouvées:", data?.length || 0);
       setReservations(data || []);
     } catch (error) {
       console.error("Erreur lors du chargement des réservations:", error);
