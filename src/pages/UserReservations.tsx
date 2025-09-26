@@ -132,6 +132,18 @@ export default function UserReservations() {
           </Card>
         ) : (
           <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <h2 className="text-xl font-semibold">Vos réservations</h2>
+                <p className="text-muted-foreground text-sm">
+                  {reservations.length} réservation{reservations.length > 1 ? 's' : ''}
+                </p>
+              </div>
+              <Button onClick={() => navigate("/reservation")} className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                Nouvelle réservation
+              </Button>
+            </div>
             {reservations.map((reservation) => (
               <Card key={reservation.id}>
                 <CardHeader>
