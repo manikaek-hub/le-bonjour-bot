@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LogOut, User } from "lucide-react";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 transition-all duration-300">
@@ -38,6 +39,14 @@ const Header = () => {
               <>
                 {user ? (
                   <div className="flex items-center space-x-2">
+                    <Button
+                      onClick={() => navigate("/mes-reservations")}
+                      variant="ghost"
+                      size="sm"
+                      className="text-muted-foreground hover:text-primary"
+                    >
+                      Mes réservations
+                    </Button>
                     <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                       <User className="w-4 h-4" />
                       <span className="hidden md:inline">{user.email}</span>
@@ -59,7 +68,11 @@ const Header = () => {
                     </Button>
                   </Link>
                 )}
-                <Button variant="ocean" size="lg">
+                <Button 
+                  variant="ocean" 
+                  size="lg"
+                  onClick={() => navigate("/reservation")}
+                >
                   Réserver
                 </Button>
               </>
