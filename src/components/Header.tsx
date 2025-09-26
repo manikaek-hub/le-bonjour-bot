@@ -1,6 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { Link } from "react-router-dom";
+import { LogOut, User } from "lucide-react";
 
 const Header = () => {
+  const { user, signOut, loading } = useAuth();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 transition-all duration-300">
       <nav className="container mx-auto px-6 py-4">
@@ -28,9 +33,38 @@ const Header = () => {
             </a>
           </div>
           
-          <Button variant="ocean" size="lg">
-            Réserver
-          </Button>
+          <div className="flex items-center space-x-4">
+            {!loading && (
+              <>
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                      <User className="w-4 h-4" />
+                      <span className="hidden md:inline">{user.email}</span>
+                    </div>
+                    <Button
+                      variant="coastal"
+                      size="sm"
+                      onClick={signOut}
+                      className="flex items-center space-x-1"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span className="hidden md:inline">Déconnexion</span>
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth">
+                    <Button variant="coastal" size="lg">
+                      Connexion
+                    </Button>
+                  </Link>
+                )}
+                <Button variant="ocean" size="lg">
+                  Réserver
+                </Button>
+              </>
+            )}
+          </div>
         </div>
       </nav>
     </header>
