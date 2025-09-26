@@ -134,7 +134,9 @@ const Auth = () => {
       });
 
       if (error) {
-        if (error.message.includes("Invalid login credentials")) {
+        if (error.message.includes("Email not confirmed")) {
+          setErrors({ general: "Veuillez d'abord confirmer votre email. Vérifiez votre boîte de réception." });
+        } else if (error.message.includes("Invalid login credentials")) {
           setErrors({ general: "Email ou mot de passe incorrect." });
         } else {
           setErrors({ general: error.message });
