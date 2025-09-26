@@ -95,46 +95,56 @@ const AccommodationSection = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Appartement Moderne & Élégant
+                Logement Unique Vue Mer
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Découvrez notre magnifique appartement entièrement rénové, alliant style contemporain 
-                et charme normand. Avec ses espaces lumineux, sa cuisine moderne équipée Smeg et ses 
-                chambres raffinées, il offre tout le confort pour un séjour d'exception.
+                Détendez-vous dans ce logement unique et tranquille offrant une vue plongeante sur la 
+                côte sauvage de Fermanville, à couper le souffle ! Vous pourrez en profiter été comme 
+                hiver, les espaces sont confortables avec sa cheminée dans le salon de 32m² ouverte sur 
+                une cuisine équipée et une grande table à manger pour des moments de convivialités en 
+                famille et entre amis.
+              </p>
+              <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
+                La maison est au départ du chemin des douaniers, l'une des plus belles balades du 
+                Cotentin et offre un accès direct à la plage.
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">60m²</div>
-                <div className="text-sm text-muted-foreground">Surface</div>
+                <div className="text-2xl font-bold text-primary mb-1">32m²</div>
+                <div className="text-sm text-muted-foreground">Salon</div>
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">2-6</div>
-                <div className="text-sm text-muted-foreground">Personnes</div>
+                <div className="text-2xl font-bold text-primary mb-1">5-7</div>
+                <div className="text-sm text-muted-foreground">Couchages</div>
               </div>
             </div>
             
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Cuisine moderne équipée Smeg</span>
+                <span className="text-muted-foreground">Salon 32m² avec cheminée</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">2 chambres avec décoration soignée</span>
+                <span className="text-muted-foreground">1 chambre lit 160cm + 1 chambre 3 lits 90cm</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Salon spacieux avec coin repas</span>
+                <span className="text-muted-foreground">Cuisine ouverte tout équipée</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Design contemporain et lumineux</span>
+                <span className="text-muted-foreground">Grande douche italienne</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Équipements haut de gamme</span>
+                <span className="text-muted-foreground">Table à manger 6-8 personnes</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">Accès direct à la plage</span>
               </div>
             </div>
             
