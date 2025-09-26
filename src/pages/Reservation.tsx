@@ -97,7 +97,8 @@ export default function Reservation() {
     try {
       const totalPrice = calculateTotalPrice();
 
-      const { error } = await supabase
+      // Créer la réservation
+      const { data: reservation, error } = await supabase
         .from("reservations")
         .insert({
           user_id: user.id,
@@ -107,7 +108,9 @@ export default function Reservation() {
           accommodation_type: formData.accommodationType,
           total_price: totalPrice,
           special_requests: formData.specialRequests || null,
-        });
+        })
+        .select()
+        .single();
 
       if (error) {
         toast({
@@ -118,9 +121,42 @@ export default function Reservation() {
         return;
       }
 
+      // Récupérer les informations du profil utilisateur
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("first_name, last_name")
+        .eq("user_id", user.id)
+        .single();
+
+      const userName = profile && (profile.first_name || profile.last_name) 
+        ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim()
+        : user.email?.split('@')[0] || 'Client';
+
+      // Envoyer l'email de confirmation
+      try {
+        await supabase.functions.invoke('send-reservation-email', {
+          body: {
+            userEmail: user.email,
+            userName: userName,
+            reservationId: reservation.id.substring(0, 8).toUpperCase(),
+            checkInDate: formData.checkInDate,
+            checkOutDate: formData.checkOutDate,
+            guests: formData.guests,
+            accommodationType: formData.accommodationType,
+            totalPrice: totalPrice,
+            specialRequests: formData.specialRequests || undefined,
+          },
+        });
+        
+        console.log("Email de confirmation envoyé");
+      } catch (emailError) {
+        console.error("Erreur lors de l'envoi de l'email:", emailError);
+        // Ne pas faire échouer la réservation si l'email échoue
+      }
+
       toast({
         title: "Réservation créée !",
-        description: `Votre réservation de ${totalPrice}€ a été créée avec succès. Vous recevrez une confirmation par email.`,
+        description: `Votre réservation de ${totalPrice}€ a été créée avec succès. Un email de confirmation vous a été envoyé.`,
       });
 
       navigate("/");
