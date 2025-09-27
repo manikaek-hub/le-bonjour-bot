@@ -2,70 +2,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Calendar, MapPin, Euro, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-const events = [
-  {
-    title: "Drheam Cup",
-    description: "Compétition nautique internationale dans le port de Cherbourg",
-    category: "Nautisme",
-    dates: "11-15 juillet 2024",
-    location: "Cherbourg-en-Cotentin",
-    price: "Gratuit",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/drheam-cup/"
-  },
-  {
-    title: "Aoûtcider",
-    description: "Festival célébrant le cidre et les traditions normandes",
-    category: "Gastronomie",
-    dates: "31 août 2024",
-    location: "Rauville la Bigot",
-    price: "Gratuit",
-    image: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/aoutcider/"
-  },
-  {
-    title: "Grand Océan",
-    description: "Festival maritime et culturel du Cotentin",
-    category: "Nautisme",
-    dates: "13-15 septembre 2024",
-    location: "Cotentin",
-    price: "Gratuit",
-    image: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/grand-ocean/"
-  },
-  {
-    title: "L'été indien des Fieffés",
-    description: "Festival de musique et d'artisanat local",
-    category: "Art et artisanat",
-    dates: "14-22 septembre 2024",
-    location: "Cotentin",
-    price: "Variable",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/les-fieffes-musiciens/"
-  },
-  {
-    title: "Journées du Patrimoine",
-    description: "Découverte exceptionnelle du patrimoine cotentinais",
-    category: "Patrimoine",
-    dates: "21-22 septembre 2024",
-    location: "Cotentin",
-    price: "Gratuit",
-    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/les-journees-du-patrimoine/"
-  },
-  {
-    title: "Noël en Cotentin",
-    description: "Festivités et marchés de Noël traditionnels",
-    category: "Gastronomie",
-    dates: "30 nov 2024 - 6 jan 2025",
-    location: "Cherbourg-en-Cotentin",
-    price: "Gratuit",
-    image: "https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=800&h=600&fit=crop",
-    link: "https://www.encotentin.fr/temps-fort/noel-en-cotentin/"
-  }
-];
+interface Event {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  dates: string;
+  location: string;
+  price: string;
+  image_url: string;
+  external_link: string;
+}
 
 const categoryColors = {
   "Nautisme": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
@@ -77,6 +27,71 @@ const categoryColors = {
 
 export default function EventsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching events:', error);
+        // Use fallback events if database fetch fails
+        setEvents(getFallbackEvents());
+      } else {
+        setEvents(data || getFallbackEvents());
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      setEvents(getFallbackEvents());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getFallbackEvents = (): Event[] => [
+    {
+      id: "1",
+      title: "Drheam Cup",
+      description: "Compétition nautique internationale dans le port de Cherbourg",
+      category: "Nautisme",
+      dates: "11-15 juillet 2024",
+      location: "Cherbourg-en-Cotentin",
+      price: "Gratuit",
+      image_url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+      external_link: "https://www.encotentin.fr/temps-fort/drheam-cup/"
+    },
+    {
+      id: "2",
+      title: "Aoûtcider",
+      description: "Festival célébrant le cidre et les traditions normandes",
+      category: "Gastronomie",
+      dates: "31 août 2024",
+      location: "Rauville la Bigot",
+      price: "Gratuit",
+      image_url: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=800&h=600&fit=crop",
+      external_link: "https://www.encotentin.fr/temps-fort/aoutcider/"
+    },
+    {
+      id: "3",
+      title: "Grand Océan",
+      description: "Festival maritime et culturel du Cotentin",
+      category: "Nautisme",
+      dates: "13-15 septembre 2024",
+      location: "Cotentin",
+      price: "Gratuit",
+      image_url: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=800&h=600&fit=crop",
+      external_link: "https://www.encotentin.fr/temps-fort/grand-ocean/"
+    }
+  ];
 
   const handleEventClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
@@ -142,71 +157,86 @@ export default function EventsSection() {
               msOverflowStyle: 'none'
             }}
           >
-            {events.map((event, index) => (
-              <Card 
-                key={event.title}
-                className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up flex-shrink-0 w-80"
-                style={{ 
-                  animationDelay: `${index * 0.1}s`,
-                  scrollSnapAlign: 'start'
-                }}
-                onClick={() => handleEventClick(event.link)}
-              >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={event.image}
-                    alt={event.title}
-                    className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge 
-                      variant="secondary" 
-                      className={`${categoryColors[event.category as keyof typeof categoryColors]} border-0`}
+            {loading ? (
+              // Loading skeleton
+              Array.from({ length: 3 }).map((_, index) => (
+                <Card key={index} className="flex-shrink-0 w-80 animate-pulse">
+                  <div className="aspect-video bg-muted"></div>
+                  <CardContent className="p-6">
+                    <div className="h-6 bg-muted rounded mb-3"></div>
+                    <div className="h-4 bg-muted rounded mb-2"></div>
+                    <div className="h-4 bg-muted rounded mb-4"></div>
+                    <div className="h-10 bg-muted rounded"></div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              events.map((event, index) => (
+                <Card 
+                  key={event.id}
+                  className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up flex-shrink-0 w-80"
+                  style={{ 
+                    animationDelay: `${index * 0.1}s`,
+                    scrollSnapAlign: 'start'
+                  }}
+                  onClick={() => handleEventClick(event.external_link)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={event.image_url}
+                      alt={event.title}
+                      className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <Badge 
+                        variant="secondary" 
+                        className={`${categoryColors[event.category as keyof typeof categoryColors]} border-0`}
+                      >
+                        {event.category}
+                      </Badge>
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                        <ExternalLink className="w-4 h-4 text-foreground" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-3">
+                      {event.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {event.description}
+                    </p>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Calendar className="w-4 h-4" />
+                        <span>{event.dates}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <MapPin className="w-4 h-4" />
+                        <span>{event.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Euro className="w-4 h-4" />
+                        <span>{event.price}</span>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
                     >
-                      {event.category}
-                    </Badge>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
-                      <ExternalLink className="w-4 h-4 text-foreground" />
-                    </div>
-                  </div>
-                </div>
-                
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-3">
-                    {event.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {event.description}
-                  </p>
-                  
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
-                      <span>{event.dates}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <MapPin className="w-4 h-4" />
-                      <span>{event.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Euro className="w-4 h-4" />
-                      <span>{event.price}</span>
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
-                  >
-                    En savoir plus
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                      En savoir plus
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
 

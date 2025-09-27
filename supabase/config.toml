@@ -2,3 +2,6 @@ project_id = "iyaokqentmxroncepuww"
 
 [functions.send-reservation-email]
 verify_jwt = false
+
+[functions.scrape-events]
+verify_jwt = false
