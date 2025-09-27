@@ -20,19 +20,18 @@ const AccommodationSection = () => {
   // Images pour la maison 70m² (5 personnes)
   const images1 = [
     { src: bedroomTropical, alt: "Chambre avec papier peint tropical" },
-    { src: bedroomLoft, alt: "Chambre sous les combles" },
     { src: livingRoom, alt: "Salon avec mur bleu canard" },
     { src: kitchenView, alt: "Vue sur la cuisine moderne" },
-    { src: kitchenDining, alt: "Cuisine et salle à manger" }
+    { src: kitchenDining, alt: "Cuisine et salle à manger" },
+    { src: livingRoomFireplace, alt: "Salon avec cheminée" },
+    { src: bedroomMultiple, alt: "Chambre avec lits multiples" },
+    { src: fireplaceDetail, alt: "Détail de la cheminée normande" }
   ];
 
   // Images pour la maison 40m² (2 adultes + 3 enfants)
   const images2 = [
-    { src: livingRoomFireplace, alt: "Salon avec cheminée" },
-    { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" },
-    { src: bedroomMultiple, alt: "Chambre avec lits multiples" },
-    { src: fireplaceDetail, alt: "Détail de la cheminée normande" },
-    { src: seaViewFermanville, alt: "Vue sur la mer à Fermanville" }
+    { src: bedroomLoft, alt: "Chambre sous les combles" },
+    { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" }
   ];
 
   const nextImage1 = () => {
