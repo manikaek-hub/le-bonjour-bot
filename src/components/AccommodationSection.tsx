@@ -112,7 +112,7 @@ const AccommodationSection = () => {
             </Card>
           </div>
           
-          <div className="space-y-6 flex flex-col h-full">
+          <div className="space-y-6 flex flex-col h-full min-h-[600px]">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Maison Vue Mer 70m² - 5 personnes
@@ -263,7 +263,7 @@ const AccommodationSection = () => {
             </Card>
           </div>
           
-          <div className="space-y-6 md:order-1 flex flex-col h-full">
+          <div className="space-y-6 md:order-1 flex flex-col h-full min-h-[600px]">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Petite Maison les pieds dans l'eau
