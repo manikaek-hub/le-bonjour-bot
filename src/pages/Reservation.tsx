@@ -74,7 +74,7 @@ const accommodationTypes = [
 export default function Reservation() {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
-  const { isDateAvailable, validateReservation, loading: availabilityLoading } = useAvailability();
+  const { isDateAvailable, isRangeAvailable, validateReservation, loading: availabilityLoading } = useAvailability();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checkInDate, setCheckInDate] = useState<Date>();
@@ -397,18 +397,48 @@ export default function Reservation() {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={checkOutDate}
-                          onSelect={setCheckOutDate}
-                          disabled={(date) => {
-                            if (getDisabledDates(date)) return true;
-                            if (checkInDate && date <= checkInDate) return true;
-                            return false;
-                          }}
-                          initialFocus
-                          className={cn("p-3 pointer-events-auto")}
-                        />
+                        <div className="space-y-2">
+                          {checkInDate && (
+                            <div className="p-3 border-b">
+                              <p className="text-sm font-medium mb-2">Suggestions de durée :</p>
+                              <div className="flex gap-2 flex-wrap">
+                                {[2, 3, 7, 14].map((days) => {
+                                  const suggestedDate = new Date(checkInDate);
+                                  suggestedDate.setDate(suggestedDate.getDate() + days);
+                                  const isAvailable = formData.accommodationType ? 
+                                    isRangeAvailable(checkInDate, suggestedDate, formData.accommodationType) : 
+                                    true;
+                                  
+                                  return (
+                                    <Button
+                                      key={days}
+                                      variant="outline"
+                                      size="sm"
+                                      disabled={!isAvailable}
+                                      onClick={() => setCheckOutDate(suggestedDate)}
+                                      className="text-xs"
+                                    >
+                                      {days} nuit{days > 1 ? 's' : ''}
+                                    </Button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                          <Calendar
+                            mode="single"
+                            selected={checkOutDate}
+                            onSelect={setCheckOutDate}
+                            disabled={(date) => {
+                              if (getDisabledDates(date)) return true;
+                              if (checkInDate && date <= checkInDate) return true;
+                              return false;
+                            }}
+                            defaultMonth={checkInDate || new Date()}
+                            initialFocus
+                            className={cn("p-3 pointer-events-auto")}
+                          />
+                        </div>
                       </PopoverContent>
                     </Popover>
                     {errors.checkOutDate && (
