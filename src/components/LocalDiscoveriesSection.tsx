@@ -11,6 +11,7 @@ import maisonRouge from "@/assets/maison-rouge.jpg";
 import maisonGosselin from "@/assets/maison-gosselin.jpg";
 import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
 import goelandLogo from "@/assets/goeland-logo.png";
+import villageCotentin from "@/assets/village-cotentin.png";
 
 const localDiscoveries = [
   {
@@ -73,23 +74,12 @@ const localDiscoveries = [
     title: "Marché du Dimanche",
     description: "Marché traditionnel avec producteurs locaux et artisans",
     category: "Marché Local",
-    image: fermeRenouville, // Réutilise l'image de la ferme
+    image: villageCotentin,
     link: "#",
     type: "local",
     location: "Place du Tôt de Haut, à côté de l'Escale",
     rating: 4.7,
     openingHours: "Dimanche 8h30-12h30"
-  },
-  {
-    title: "Marché de Saint-Pierre-Église",
-    description: "Marché municipal, une véritable institution locale ! Au cœur du bourg",
-    category: "Marché Local",
-    image: fermeRenouville, // Réutilise l'image de la ferme
-    link: "#",
-    type: "local",
-    location: "Place de l'abbé de Saint-Pierre",
-    rating: 4.8,
-    openingHours: "Mercredi 8h30-13h00"
   }
 ];
 
@@ -106,7 +96,7 @@ export default function LocalDiscoveriesSection() {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-ocean bg-clip-text text-transparent">
-            Pépites du Cotentin
+            Nos coups de cœur
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Découvrez les trésors authentiques de notre région. Des expériences uniques 
