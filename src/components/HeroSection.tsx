@@ -5,6 +5,19 @@ import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 const HeroSection = () => {
   const navigate = useNavigate();
 
+  const handleReservationClick = () => {
+    console.log("Bouton réservation cliqué");
+    navigate("/reservation");
+  };
+
+  const handleDiscoverClick = () => {
+    console.log("Bouton découvrir cliqué");
+    const element = document.getElementById('hebergements');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       id="accueil" 
@@ -35,29 +48,24 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            variant="ocean" 
-            size="xl" 
-            className="min-w-[200px] animate-pulse-glow touch-manipulation cursor-pointer"
+          <button 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none"
             aria-label="Réserver votre séjour au FortJoret Resort maintenant"
-            onClick={() => navigate("/reservation")}
-            onTouchStart={() => {}} // Enable touch events for mobile
+            onClick={handleReservationClick}
+            onTouchEnd={handleReservationClick}
+            style={{ touchAction: 'manipulation' }}
           >
             Réserver Maintenant
-          </Button>
-          <Button 
-            variant="coastal" 
-            size="xl" 
-            className="min-w-[200px] touch-manipulation cursor-pointer"
+          </button>
+          <button 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none"
             aria-label="Découvrir le FortJoret Resort et ses services"
-            onClick={() => {
-              const element = document.getElementById('hebergements');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            onTouchStart={() => {}} // Enable touch events for mobile
+            onClick={handleDiscoverClick}
+            onTouchEnd={handleDiscoverClick}
+            style={{ touchAction: 'manipulation' }}
           >
             Découvrir
-          </Button>
+          </button>
         </div>
       </div>
       
