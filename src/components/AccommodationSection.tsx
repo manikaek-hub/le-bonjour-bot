@@ -367,7 +367,7 @@ const AccommodationSection = () => {
                     window.location.href = '/reservation';
                   }}
                 >
-                  👨‍👩‍👧‍👦 Réserver pour famille
+                  🏡 Réserver cette maison
                 </div>
               </div>
             </div>
