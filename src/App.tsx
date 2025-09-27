@@ -10,6 +10,7 @@ import Reservation from "./pages/Reservation";
 import UserReservations from "./pages/UserReservations";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Admin from "./pages/admin/Admin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReservations from "./pages/admin/AdminReservations";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminPayments from "./pages/admin/AdminPayments";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/mes-reservations" element={<UserReservations />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/reservations" element={<AdminReservations />} />
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/payments" element={<AdminPayments />} />

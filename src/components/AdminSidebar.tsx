@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/sidebar"
 
 const adminItems = [
-  { title: "Tableau de bord", url: "/admin", icon: BarChart3 },
+  { title: "Tableau de bord", url: "/admin/dashboard", icon: BarChart3 },
   { title: "Réservations", url: "/admin/reservations", icon: Calendar },
   { title: "Utilisateurs", url: "/admin/users", icon: Users },
   { title: "Paiements", url: "/admin/payments", icon: CreditCard },
@@ -39,8 +39,8 @@ export function AdminSidebar() {
   const currentPath = location.pathname
 
   const isActive = (path: string) => {
-    if (path === "/admin") {
-      return currentPath === "/admin"
+    if (path === "/admin/dashboard") {
+      return currentPath === "/admin/dashboard" || currentPath === "/admin";
     }
     return currentPath.startsWith(path)
   }
