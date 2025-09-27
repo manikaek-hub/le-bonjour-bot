@@ -9,14 +9,14 @@ import fermeRenouville from "@/assets/ferme-renouville.jpg";
 import phareCote from "@/assets/phare-cote.jpg";
 import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
 import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
-import goeland1937 from "@/assets/goeland-1937.jpg";
+import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
 
 const localDiscoveries = [
   {
     title: "Le Goéland 1937",
     description: "Restaurant face à la mer avec vue panoramique sur la Manche",
     category: "Restaurant",
-    image: goeland1937,
+    image: goelandVueMer,
     link: "https://www.instagram.com/legoeland1937_/?hl=fr",
     type: "instagram",
     location: "Fermanville",
