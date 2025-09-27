@@ -148,9 +148,58 @@ const AccommodationSection = () => {
               </div>
             </div>
             
-            <Button variant="ocean" size="lg" className="w-full md:w-auto animate-pulse-glow">
-              🏖️ Réserver Maintenant
-            </Button>
+            <div 
+              style={{
+                width: '100%',
+                maxWidth: '300px'
+              }}
+            >
+              <div
+                style={{
+                  width: '100%',
+                  height: '50px',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
+                  color: 'white',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  position: 'relative',
+                  zIndex: 999,
+                  touchAction: 'manipulation',
+                  transition: 'all 0.3s ease'
+                }}
+                onTouchStart={() => {
+                  console.log('TOUCH HÉBERGEMENT RÉSERVER');
+                }}
+                onTouchEnd={(e) => {
+                  console.log('TOUCH END HÉBERGEMENT');
+                  e.preventDefault();
+                  setTimeout(() => {
+                    window.location.href = '/reservation';
+                  }, 100);
+                }}
+                onMouseDown={(e) => {
+                  console.log('MOUSE DOWN HÉBERGEMENT');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
+                onClick={(e) => {
+                  console.log('CLICK HÉBERGEMENT');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
+              >
+                🏖️ Réserver Maintenant
+              </div>
+            </div>
           </div>
         </div>
       </div>
