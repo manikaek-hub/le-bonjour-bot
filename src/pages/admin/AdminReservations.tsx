@@ -15,7 +15,8 @@ import {
   XCircle,
   AlertCircle,
   Eye,
-  Edit
+  Edit,
+  Trash2
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -115,23 +116,27 @@ export default function AdminReservations() {
     setFilteredReservations(filtered);
   };
 
-  const updateReservationStatus = async (id: string, newStatus: string) => {
+  const updateReservationStatus = async (reservationId: string, newStatus: string) => {
     try {
       const { error } = await supabase
         .from('reservations')
-        .update({ status: newStatus })
-        .eq('id', id);
+        .update({ status: newStatus, updated_at: new Date().toISOString() })
+        .eq('id', reservationId);
 
       if (error) throw error;
 
-      // Mettre à jour l'état local
+      // Mettre à jour la liste locale
       setReservations(prev => 
-        prev.map(r => r.id === id ? { ...r, status: newStatus } : r)
+        prev.map(r => 
+          r.id === reservationId 
+            ? { ...r, status: newStatus, updated_at: new Date().toISOString() }
+            : r
+        )
       );
-
+      
       toast({
         title: "Succès",
-        description: "Statut de la réservation mis à jour",
+        description: `Réservation ${newStatus === 'confirmed' ? 'confirmée' : 'annulée'}`,
       });
     } catch (error) {
       console.error('Error updating reservation:', error);
@@ -143,12 +148,69 @@ export default function AdminReservations() {
     }
   };
 
+  const deleteReservation = async (reservationId: string) => {
+    try {
+      const { error } = await supabase
+        .from('reservations')
+        .delete()
+        .eq('id', reservationId);
+
+      if (error) throw error;
+
+      // Mettre à jour la liste locale
+      setReservations(prev => prev.filter(r => r.id !== reservationId));
+      
+      toast({
+        title: "Succès",
+        description: "Réservation supprimée définitivement",
+      });
+    } catch (error) {
+      console.error('Error deleting reservation:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer la réservation",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const deleteOldCancelledReservations = async () => {
+    try {
+      // Supprimer les réservations annulées de plus de 30 jours
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      const { error } = await supabase
+        .from('reservations')
+        .delete()
+        .eq('status', 'cancelled')
+        .lt('updated_at', thirtyDaysAgo.toISOString());
+
+      if (error) throw error;
+
+      // Recharger les données
+      await fetchReservations();
+      
+      toast({
+        title: "Succès",
+        description: "Réservations annulées anciennes supprimées",
+      });
+    } catch (error) {
+      console.error('Error deleting old reservations:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer les anciennes réservations",
+        variant: "destructive",
+      });
+    }
+  };
+
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'confirmed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
       case 'pending':
         return <Clock className="w-4 h-4 text-yellow-500" />;
+      case 'confirmed':
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
       case 'cancelled':
         return <XCircle className="w-4 h-4 text-red-500" />;
       default:
@@ -158,34 +220,38 @@ export default function AdminReservations() {
 
   const getStatusLabel = (status: string) => {
     switch (status) {
-      case 'confirmed':
-        return 'Confirmée';
       case 'pending':
         return 'En attente';
+      case 'confirmed':
+        return 'Confirmée';
       case 'cancelled':
         return 'Annulée';
       default:
-        return status;
+        return 'Inconnu';
     }
   };
 
   const getAccommodationLabel = (type: string) => {
     switch (type) {
+      case 'studio_35m2':
+        return 'Studio 35m² (2 personnes)';
+      case 'suite_familiale':
+        return 'Suite Familiale (4 personnes)';
       case 'maison_70m2':
-        return 'Maison 70m²';
-      case 'maison_40m2':
-        return 'Maison 40m²';
+        return 'Maison 70m² (5 personnes)';
+      case 'villa_luxe':
+        return 'Villa de Luxe (8+ personnes)';
       default:
         return type;
     }
   };
 
-  const getStatusVariant = (status: string) => {
+  const getStatusVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
     switch (status) {
-      case 'confirmed':
-        return 'default';
       case 'pending':
         return 'secondary';
+      case 'confirmed':
+        return 'default';
       case 'cancelled':
         return 'destructive';
       default:
@@ -195,12 +261,14 @@ export default function AdminReservations() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-96">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-          <p>Chargement des réservations...</p>
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-96">
+          <div className="text-center">
+            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            <p>Chargement des réservations...</p>
+          </div>
         </div>
-      </div>
+      </AdminLayout>
     );
   }
 
@@ -260,8 +328,10 @@ export default function AdminReservations() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Tous les hébergements</SelectItem>
+                    <SelectItem value="studio_35m2">Studio 35m²</SelectItem>
+                    <SelectItem value="suite_familiale">Suite Familiale</SelectItem>
                     <SelectItem value="maison_70m2">Maison 70m²</SelectItem>
-                    <SelectItem value="maison_40m2">Maison 40m²</SelectItem>
+                    <SelectItem value="villa_luxe">Villa de Luxe</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -307,8 +377,17 @@ export default function AdminReservations() {
         <Card>
           <CardHeader>
             <CardTitle>Réservations</CardTitle>
-            <CardDescription>
-              {filteredReservations.length} réservation(s) trouvée(s)
+            <CardDescription className="flex justify-between items-center">
+              <span>{filteredReservations.length} réservation(s) trouvée(s)</span>
+              <Button
+                onClick={deleteOldCancelledReservations}
+                variant="outline"
+                size="sm"
+                className="text-destructive hover:text-destructive"
+              >
+                <Trash2 className="w-4 h-4 mr-2" />
+                Nettoyer l'historique (30j+)
+              </Button>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -391,14 +470,25 @@ export default function AdminReservations() {
                       )}
                       
                       {reservation.status === 'cancelled' && (
-                        <Button 
-                          size="sm" 
-                          onClick={() => updateReservationStatus(reservation.id, 'confirmed')}
-                          className="bg-green-600 hover:bg-green-700"
-                        >
-                          <CheckCircle className="w-4 h-4 mr-1" />
-                          Réactiver
-                        </Button>
+                        <>
+                          <Button 
+                            size="sm" 
+                            onClick={() => updateReservationStatus(reservation.id, 'confirmed')}
+                            className="bg-green-600 hover:bg-green-700"
+                          >
+                            <CheckCircle className="w-4 h-4 mr-1" />
+                            Réactiver
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            onClick={() => deleteReservation(reservation.id)}
+                            className="text-destructive hover:text-destructive"
+                          >
+                            <Trash2 className="w-4 h-4 mr-1" />
+                            Supprimer
+                          </Button>
+                        </>
                       )}
                     </div>
                   </div>
