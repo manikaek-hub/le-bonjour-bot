@@ -91,12 +91,28 @@ const HeroSection = () => {
                   touchAction: 'manipulation',
                   transition: 'all 0.3s ease'
                 }}
-                onTouchStart={() => console.log('TOUCH RÉSERVER')}
-                onTouchEnd={() => window.location.href = '/reservation'}
-                onMouseDown={() => window.location.href = '/reservation'}
-                onClick={() => window.location.href = '/reservation'}
+                onTouchStart={() => {
+                  console.log('TOUCH RÉSERVER BUTTON');
+                }}
+                onTouchEnd={(e) => {
+                  console.log('TOUCH END RÉSERVER');
+                  e.preventDefault();
+                  setTimeout(() => {
+                    window.location.href = '/reservation';
+                  }, 100);
+                }}
+                onMouseDown={(e) => {
+                  console.log('MOUSE DOWN RÉSERVER');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
+                onClick={(e) => {
+                  console.log('CLICK RÉSERVER');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
               >
-                Réserver Maintenant
+                📅 Réserver Maintenant
               </div>
               
               <div 
