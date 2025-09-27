@@ -50,34 +50,58 @@ serve(async (req) => {
     }
     logStep("Admin access verified");
 
+    // Vérifier si la clé Stripe est disponible
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) {
+      logStep("No Stripe key found, returning empty data");
+      return new Response(JSON.stringify({
+        payments: [],
+        sessions: [],
+        has_more: false,
+        message: "Stripe not configured - no payments available"
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
+
     // Initialiser Stripe
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
+    const stripe = new Stripe(stripeKey, { 
       apiVersion: "2025-08-27.basil" 
     });
 
     // Récupérer les paiements récents
     const { limit = 50, starting_after } = await req.json().catch(() => ({}));
     
-    const payments = await stripe.paymentIntents.list({
-      limit: Math.min(limit, 100),
-      starting_after,
-      expand: ['data.customer']
-    });
+    let payments, sessions;
+    
+    try {
+      payments = await stripe.paymentIntents.list({
+        limit: Math.min(limit, 100),
+        starting_after,
+        expand: ['data.customer']
+      });
+      logStep("Retrieved payments", { count: payments.data.length });
+    } catch (stripeError) {
+      logStep("Stripe payment error", { error: stripeError });
+      payments = { data: [], has_more: false };
+    }
 
-    logStep("Retrieved payments", { count: payments.data.length });
-
-    // Récupérer les sessions de checkout pour plus d'informations
-    const sessions = await stripe.checkout.sessions.list({
-      limit: Math.min(limit, 100),
-      expand: ['data.customer']
-    });
-
-    logStep("Retrieved checkout sessions", { count: sessions.data.length });
+    try {
+      sessions = await stripe.checkout.sessions.list({
+        limit: Math.min(limit, 100),
+        expand: ['data.customer']
+      });
+      logStep("Retrieved checkout sessions", { count: sessions.data.length });
+    } catch (stripeError) {
+      logStep("Stripe sessions error", { error: stripeError });
+      sessions = { data: [] };
+    }
 
     return new Response(JSON.stringify({
       payments: payments.data,
       sessions: sessions.data,
-      has_more: payments.has_more
+      has_more: payments.has_more || false
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,

@@ -71,13 +71,21 @@ export default function AdminPayments() {
 
       if (error) throw error;
 
+      if (data.message && data.message.includes("Stripe not configured")) {
+        toast({
+          title: "Information",
+          description: "Stripe n'est pas configuré. Aucun paiement disponible.",
+          variant: "default",
+        });
+      }
+
       setPayments(data.payments || []);
       setSessions(data.sessions || []);
     } catch (error) {
       console.error('Error fetching payments:', error);
       toast({
         title: "Erreur",
-        description: "Impossible de charger les paiements",
+        description: error.message || "Impossible de charger les paiements",
         variant: "destructive",
       });
     } finally {
