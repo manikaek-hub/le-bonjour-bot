@@ -11,7 +11,7 @@ import bedroomMultiple from "@/assets/bedroom-multiple.jpg";
 import fireplaceDetail from "@/assets/fireplace-detail.jpg";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 import maison2Sunset from "@/assets/maison2-sunset.jpg";
-import maison2Terrain from "@/assets/maison2-terrain.jpeg";
+import maison2Terrain from "@/assets/maison2-terrain.jpg";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
