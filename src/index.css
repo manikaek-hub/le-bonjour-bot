@@ -8,109 +8,107 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Côte Normande Color Palette */
-    --background: 210 30% 98%;
-    --foreground: 215 25% 15%;
+    /* Modern Social Color Palette */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-    --card: 210 25% 97%;
-    --card-foreground: 215 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-    --popover: 210 25% 97%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    /* Ocean Blues */
-    --primary: 210 85% 32%;
-    --primary-foreground: 210 30% 98%;
-    --primary-glow: 210 75% 45%;
+    /* Instagram-inspired gradients */
+    --primary: 320 65% 52%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 280 80% 60%;
 
-    /* Pearl Whites */
-    --secondary: 210 20% 94%;
-    --secondary-foreground: 215 25% 20%;
+    /* Soft neutrals */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    /* Sand Beige */
-    --muted: 45 25% 88%;
-    --muted-foreground: 215 15% 45%;
+    /* Light grays */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    /* Sea Foam */
-    --accent: 175 40% 75%;
-    --accent-foreground: 215 25% 20%;
+    /* Accent colors */
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 30% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 210 20% 85%;
-    --input: 210 20% 90%;
-    --ring: 210 85% 32%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 320 65% 52%;
 
-    /* Gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(210 85% 32%), hsl(210 75% 45%));
-    --gradient-sunset: linear-gradient(135deg, hsl(25 85% 60%), hsl(45 75% 65%));
-    --gradient-coastal: linear-gradient(180deg, hsl(210 30% 98%), hsl(210 25% 95%));
+    /* Modern gradients */
+    --gradient-instagram: linear-gradient(45deg, hsl(320 65% 52%), hsl(280 80% 60%), hsl(240 100% 70%));
+    --gradient-sunset: linear-gradient(135deg, hsl(15 100% 65%), hsl(45 100% 70%));
+    --gradient-ocean: linear-gradient(135deg, hsl(210 100% 56%), hsl(195 100% 65%));
+    --gradient-soft: linear-gradient(180deg, hsl(0 0% 100%), hsl(240 4.8% 95.9%));
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(210 85% 32% / 0.1);
-    --shadow-elegant: 0 10px 40px -10px hsl(210 85% 32% / 0.2);
+    /* Soft shadows */
+    --shadow-soft: 0 1px 3px hsl(240 5% 64% / 0.12), 0 1px 2px hsl(240 5% 64% / 0.24);
+    --shadow-medium: 0 4px 6px hsl(240 5% 64% / 0.1), 0 2px 4px hsl(240 5% 64% / 0.06);
+    --shadow-large: 0 10px 15px hsl(240 5% 64% / 0.1), 0 4px 6px hsl(240 5% 64% / 0.05);
     
-    /* Animation */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smooth animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
+    /* Sidebar colors */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 320 65% 52%;
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 320 65% 52%;
   }
 
   .dark {
-    /* Dark mode - Evening Coast */
-    --background: 215 30% 8%;
-    --foreground: 210 30% 95%;
+    /* Dark mode - Modern Night */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 215 25% 10%;
-    --card-foreground: 210 30% 95%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 215 25% 10%;
-    --popover-foreground: 210 30% 95%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 75% 50%;
-    --primary-foreground: 215 30% 8%;
-    --primary-glow: 210 65% 60%;
+    --primary: 320 65% 52%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 280 80% 60%;
 
-    --secondary: 215 20% 15%;
-    --secondary-foreground: 210 30% 90%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 215 15% 18%;
-    --muted-foreground: 210 15% 65%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 175 35% 40%;
-    --accent-foreground: 210 30% 95%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 50%;
-    --destructive-foreground: 210 30% 95%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 215 20% 20%;
-    --input: 215 20% 18%;
-    --ring: 210 75% 50%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 320 65% 52%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 320 65% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 320 65% 52%;
   }
 }
 
@@ -129,41 +127,70 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-soft);
   }
   
-  .shadow-elegant {
-    box-shadow: var(--shadow-elegant);
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
   }
   
-  .bg-gradient-ocean {
-    background: var(--gradient-ocean);
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .bg-gradient-instagram {
+    background: var(--gradient-instagram);
   }
   
   .bg-gradient-sunset {
     background: var(--gradient-sunset);
   }
   
-  .bg-gradient-coastal {
-    background: var(--gradient-coastal);
+  .bg-gradient-ocean {
+    background: var(--gradient-ocean);
+  }
+  
+  .bg-gradient-soft {
+    background: var(--gradient-soft);
   }
   
   .transition-smooth {
     transition: var(--transition-smooth);
   }
   
-  /* Animation shimmer pour le bandeau promo */
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+  .transition-spring {
+    transition: var(--transition-spring);
   }
   
-  .animate-shimmer {
-    animation: shimmer 3s infinite;
+  /* Modern animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
   
-  /* Animations d'entrée pour les sections */
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(320 65% 52% / 0.3);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(320 65% 52% / 0.6);
+      transform: scale(1.02);
+    }
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -171,21 +198,53 @@ All colors MUST be HSL.
     }
   }
   
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out;
-  }
-  
-  /* Effet de pulsation pour les CTA importants */
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px hsl(210 85% 32% / 0.3);
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
     }
     50% {
-      box-shadow: 0 0 30px hsl(210 85% 32% / 0.6);
+      opacity: 1;
+      transform: scale(1.05);
     }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
   
   .animate-pulse-glow {
     animation: pulse-glow 2s infinite;
+  }
+  
+  .animate-slide-in-left {
+    animation: slide-in-left 0.5s ease-out;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounce-in 0.6s ease-out;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }

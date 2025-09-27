@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+import ModernLayout from "@/components/ModernLayout";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Reservation from "./pages/Reservation";
@@ -24,20 +25,22 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/reservation" element={<Reservation />} />
-          <Route path="/mes-reservations" element={<UserReservations />} />
-          <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/reservations" element={<AdminReservations />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/payments" element={<AdminPayments />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ModernLayout>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/reservation" element={<Reservation />} />
+            <Route path="/mes-reservations" element={<UserReservations />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/reservations" element={<AdminReservations />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/payments" element={<AdminPayments />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ModernLayout>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
