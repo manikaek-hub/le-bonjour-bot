@@ -10,6 +10,7 @@ import Reservation from "./pages/Reservation";
 import UserReservations from "./pages/UserReservations";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Admin from "./pages/admin/Admin";
+import AdminReservations from "./pages/admin/AdminReservations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/mes-reservations" element={<UserReservations />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/reservations" element={<AdminReservations />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
