@@ -6,7 +6,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 
 import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
 import fermeRenouville from "@/assets/ferme-renouville.jpg";
-import phareCote from "@/assets/phare-cote.jpg";
+import phareCapLevi from "@/assets/phare-cap-levi.jpg";
 import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
 import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
 import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
@@ -38,14 +38,14 @@ const localDiscoveries = [
   },
   {
     title: "Phare du Cap Lévi",
-    description: "Monument historique offrant une vue imprenable sur la côte",
+    description: "Phare carré de 28 mètres de haut érigé en 1858, offrant une vue imprenable sur la côte",
     category: "Patrimoine",
-    image: phareCote,
+    image: phareCapLevi,
     link: "https://www.encotentin.fr/patrimoine-culturel/phare-du-cap-levi/",
     type: "website",
-    location: "Fermanville",
+    location: "9 Village Le Cap Levi, Fermanville",
     rating: 4.7,
-    openingHours: "10h-17h"
+    openingHours: "Variable selon saison"
   },
   {
     title: "La Maison Rouge",
