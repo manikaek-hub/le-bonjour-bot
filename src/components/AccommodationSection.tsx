@@ -14,14 +14,20 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const AccommodationSection = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex1, setCurrentImageIndex1] = useState(0);
+  const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
   
-  const images = [
+  // Images pour la maison 70m² (5 personnes)
+  const images1 = [
     { src: bedroomTropical, alt: "Chambre avec papier peint tropical" },
     { src: bedroomLoft, alt: "Chambre sous les combles" },
     { src: livingRoom, alt: "Salon avec mur bleu canard" },
     { src: kitchenView, alt: "Vue sur la cuisine moderne" },
-    { src: kitchenDining, alt: "Cuisine et salle à manger" },
+    { src: kitchenDining, alt: "Cuisine et salle à manger" }
+  ];
+
+  // Images pour la maison 40m² (2 adultes + 3 enfants)
+  const images2 = [
     { src: livingRoomFireplace, alt: "Salon avec cheminée" },
     { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" },
     { src: bedroomMultiple, alt: "Chambre avec lits multiples" },
@@ -29,12 +35,20 @@ const AccommodationSection = () => {
     { src: seaViewFermanville, alt: "Vue sur la mer à Fermanville" }
   ];
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const nextImage1 = () => {
+    setCurrentImageIndex1((prev) => (prev + 1) % images1.length);
   };
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  const prevImage1 = () => {
+    setCurrentImageIndex1((prev) => (prev - 1 + images1.length) % images1.length);
+  };
+
+  const nextImage2 = () => {
+    setCurrentImageIndex2((prev) => (prev + 1) % images2.length);
+  };
+
+  const prevImage2 = () => {
+    setCurrentImageIndex2((prev) => (prev - 1 + images2.length) % images2.length);
   };
   return (
     <section id="hebergements" className="py-20 bg-gradient-to-b from-background to-secondary/20">
@@ -44,32 +58,33 @@ const AccommodationSection = () => {
             Nos Hébergements
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Des espaces de vie exceptionnels alliant charme normand et confort moderne, 
+            Deux logements exceptionnels alliant charme normand et confort moderne, 
             pour une expérience inoubliable en bord de mer.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* MAISON 70m² - 5 PERSONNES */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div>
             <Card className="overflow-hidden shadow-elegant border-0 bg-card/50 backdrop-blur-sm relative group">
               <CardContent className="p-0">
                 <div className="relative">
                   <img 
-                    src={images[currentImageIndex].src} 
-                    alt={images[currentImageIndex].alt}
+                    src={images1[currentImageIndex1].src} 
+                    alt={images1[currentImageIndex1].alt}
                     className="w-full h-80 object-cover transition-all duration-500"
                   />
                   
                   {/* Navigation buttons */}
                   <button
-                    onClick={prevImage}
+                    onClick={prevImage1}
                     className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/30"
                   >
                     <ChevronLeft className="w-6 h-6 text-white" />
                   </button>
                   
                   <button
-                    onClick={nextImage}
+                    onClick={nextImage1}
                     className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/30"
                   >
                     <ChevronRight className="w-6 h-6 text-white" />
@@ -77,12 +92,12 @@ const AccommodationSection = () => {
                   
                   {/* Image indicators */}
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                    {images.map((_, index) => (
+                    {images1.map((_, index) => (
                       <button
                         key={index}
-                        onClick={() => setCurrentImageIndex(index)}
+                        onClick={() => setCurrentImageIndex1(index)}
                         className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                          index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                          index === currentImageIndex1 ? 'bg-white' : 'bg-white/50'
                         }`}
                       />
                     ))}
@@ -95,40 +110,38 @@ const AccommodationSection = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Logement Unique Vue Mer
+                Maison Vue Mer 70m² - 5 personnes
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Détendez-vous dans ce logement unique et tranquille offrant une vue plongeante sur la 
-                côte sauvage de Fermanville, à couper le souffle ! Vous pourrez en profiter été comme 
-                hiver, les espaces sont confortables avec sa cheminée dans le salon de 32m² ouverte sur 
-                une cuisine équipée et une grande table à manger pour des moments de convivialités en 
-                famille et entre amis.
+                Spacieuse maison de 70m² avec vue plongeante sur la côte sauvage de Fermanville. 
+                Parfaite pour une famille ou un groupe d'amis, elle dispose de tout le confort moderne 
+                avec sa cheminée dans le salon ouvert sur une cuisine équipée.
               </p>
               <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
-                La maison est au départ du chemin des douaniers, l'une des plus belles balades du 
-                Cotentin et offre un accès direct à la plage.
+                Idéale pour des séjours conviviaux avec accès direct au chemin des douaniers 
+                et à la plage.
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">32m²</div>
-                <div className="text-sm text-muted-foreground">Salon</div>
+                <div className="text-2xl font-bold text-primary mb-1">70m²</div>
+                <div className="text-sm text-muted-foreground">Surface</div>
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">5-7</div>
-                <div className="text-sm text-muted-foreground">Couchages</div>
+                <div className="text-2xl font-bold text-primary mb-1">5</div>
+                <div className="text-sm text-muted-foreground">Personnes max</div>
               </div>
             </div>
             
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Salon 32m² avec cheminée</span>
+                <span className="text-muted-foreground">Salon spacieux avec cheminée</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">1 chambre lit 160cm + 1 chambre 3 lits 90cm</span>
+                <span className="text-muted-foreground">2 chambres (1 lit double + 3 lits simples)</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
@@ -140,7 +153,152 @@ const AccommodationSection = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Table à manger 6-8 personnes</span>
+                <span className="text-muted-foreground">Vue mer panoramique</span>
+              </div>
+            </div>
+            
+            <div 
+              style={{
+                width: '100%',
+                maxWidth: '300px'
+              }}
+            >
+              <div
+                style={{
+                  width: '100%',
+                  height: '50px',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
+                  color: 'white',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  position: 'relative',
+                  zIndex: 999,
+                  touchAction: 'manipulation',
+                  transition: 'all 0.3s ease'
+                }}
+                onTouchStart={() => {
+                  console.log('TOUCH MAISON 70M²');
+                }}
+                onTouchEnd={(e) => {
+                  console.log('TOUCH END MAISON 70M²');
+                  e.preventDefault();
+                  setTimeout(() => {
+                    window.location.href = '/reservation';
+                  }, 100);
+                }}
+                onMouseDown={(e) => {
+                  console.log('MOUSE DOWN MAISON 70M²');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
+                onClick={(e) => {
+                  console.log('CLICK MAISON 70M²');
+                  e.preventDefault();
+                  window.location.href = '/reservation';
+                }}
+              >
+                🏡 Réserver cette maison
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* MAISON 40m² - 2 ADULTES + 3 ENFANTS */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="md:order-2">
+            <Card className="overflow-hidden shadow-elegant border-0 bg-card/50 backdrop-blur-sm relative group">
+              <CardContent className="p-0">
+                <div className="relative">
+                  <img 
+                    src={images2[currentImageIndex2].src} 
+                    alt={images2[currentImageIndex2].alt}
+                    className="w-full h-80 object-cover transition-all duration-500"
+                  />
+                  
+                  {/* Navigation buttons */}
+                  <button
+                    onClick={prevImage2}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/30"
+                  >
+                    <ChevronLeft className="w-6 h-6 text-white" />
+                  </button>
+                  
+                  <button
+                    onClick={nextImage2}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/30"
+                  >
+                    <ChevronRight className="w-6 h-6 text-white" />
+                  </button>
+                  
+                  {/* Image indicators */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                    {images2.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex2(index)}
+                        className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                          index === currentImageIndex2 ? 'bg-white' : 'bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="space-y-6 md:order-1">
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                Maison Familiale 40m² - 2 adultes + 3 enfants
+              </h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Maison cosy de 40m² parfaitement adaptée aux familles avec enfants. 
+                Offre tout le confort nécessaire dans un espace optimisé et chaleureux 
+                avec vue sur la mer.
+              </p>
+              <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
+                Configuration idéale pour les parents avec enfants, à proximité 
+                immédiate de la plage et des sentiers côtiers.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-secondary/50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-primary mb-1">40m²</div>
+                <div className="text-sm text-muted-foreground">Surface</div>
+              </div>
+              <div className="bg-secondary/50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-primary mb-1">2+3</div>
+                <div className="text-sm text-muted-foreground">Adultes + enfants</div>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">Salon avec cheminée</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">1 chambre parentale + coin enfants</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">Kitchenette équipée</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">Salle de bain fonctionnelle</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
@@ -177,27 +335,27 @@ const AccommodationSection = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onTouchStart={() => {
-                  console.log('TOUCH HÉBERGEMENT RÉSERVER');
+                  console.log('TOUCH MAISON 40M²');
                 }}
                 onTouchEnd={(e) => {
-                  console.log('TOUCH END HÉBERGEMENT');
+                  console.log('TOUCH END MAISON 40M²');
                   e.preventDefault();
                   setTimeout(() => {
                     window.location.href = '/reservation';
                   }, 100);
                 }}
                 onMouseDown={(e) => {
-                  console.log('MOUSE DOWN HÉBERGEMENT');
+                  console.log('MOUSE DOWN MAISON 40M²');
                   e.preventDefault();
                   window.location.href = '/reservation';
                 }}
                 onClick={(e) => {
-                  console.log('CLICK HÉBERGEMENT');
+                  console.log('CLICK MAISON 40M²');
                   e.preventDefault();
                   window.location.href = '/reservation';
                 }}
               >
-                🏖️ Réserver Maintenant
+                👨‍👩‍👧‍👦 Réserver pour famille
               </div>
             </div>
           </div>
