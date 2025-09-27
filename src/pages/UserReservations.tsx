@@ -5,7 +5,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar, Users, Home, Clock, MapPin } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { ArrowLeft, Calendar, Users, Home, Clock, MapPin, XCircle, CreditCard } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface Reservation {
   id: string;
@@ -43,6 +55,7 @@ export default function UserReservations() {
   const navigate = useNavigate();
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
+  const [cancelling, setCancelling] = useState<string | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -83,8 +96,88 @@ export default function UserReservations() {
       setReservations(data || []);
     } catch (error) {
       console.error("Erreur lors du chargement des réservations:", error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les réservations.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCancelReservation = async (reservationId: string, reservationStatus: string) => {
+    if (reservationStatus === 'confirmed') {
+      toast({
+        title: "Annulation impossible",
+        description: "Les réservations confirmées ne peuvent pas être annulées directement. Contactez-nous.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setCancelling(reservationId);
+    
+    try {
+      const { error } = await supabase
+        .from("reservations")
+        .update({ status: 'cancelled' })
+        .eq("id", reservationId);
+
+      if (error) throw error;
+
+      toast({
+        title: "Réservation annulée",
+        description: "Votre réservation a été annulée avec succès.",
+      });
+
+      // Refresh the reservations list
+      fetchReservations();
+    } catch (error) {
+      console.error("Error cancelling reservation:", error);
+      toast({
+        title: "Erreur",
+        description: "Impossible d'annuler la réservation.",
+        variant: "destructive",
+      });
+    } finally {
+      setCancelling(null);
+    }
+  };
+
+  const handlePayReservation = async (reservationId: string, totalPrice: number, accommodationType: string) => {
+    try {
+      const accommodationLabel = accommodationTypes[accommodationType as keyof typeof accommodationTypes] || accommodationType;
+      const description = `Paiement pour ${accommodationLabel}`;
+      
+      const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
+        body: {
+          totalPrice: totalPrice,
+          reservationId: reservationId,
+          description: description
+        }
+      });
+
+      if (paymentError) {
+        throw new Error(paymentError.message);
+      }
+
+      if (paymentData?.url) {
+        window.open(paymentData.url, '_blank');
+        toast({
+          title: "Redirection vers le paiement",
+          description: "Vous allez être redirigé vers la page de paiement sécurisée.",
+        });
+      } else {
+        throw new Error('Impossible de créer la session de paiement');
+      }
+    } catch (error) {
+      console.error('Error creating payment:', error);
+      toast({
+        title: "Erreur",
+        description: error instanceof Error ? error.message : "Impossible de créer la session de paiement.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -214,16 +307,62 @@ export default function UserReservations() {
                     </div>
                   )}
 
-                  <div className="mt-4 flex gap-2">
-                    {reservation.status === 'confirmed' && (
-                      <Button variant="outline" size="sm">
-                        Modifier
-                      </Button>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    {reservation.status === 'pending' && (
+                      <>
+                        <Button 
+                          variant="default" 
+                          size="sm"
+                          onClick={() => handlePayReservation(reservation.id, reservation.total_price, reservation.accommodation_type)}
+                          className="flex items-center gap-2"
+                        >
+                          <CreditCard className="w-4 h-4" />
+                          Payer maintenant
+                        </Button>
+                        
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              className="flex items-center gap-2 text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground"
+                            >
+                              <XCircle className="w-4 h-4" />
+                              Annuler
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Confirmer l'annulation</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Êtes-vous sûr de vouloir annuler cette réservation ? Cette action ne peut pas être annulée.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Retour</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleCancelReservation(reservation.id, reservation.status)}
+                                disabled={cancelling === reservation.id}
+                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              >
+                                {cancelling === reservation.id ? "Annulation..." : "Annuler la réservation"}
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </>
                     )}
-                    {(reservation.status === 'pending' || reservation.status === 'confirmed') && (
-                      <Button variant="destructive" size="sm">
-                        Annuler
-                      </Button>
+                    
+                    {reservation.status === 'confirmed' && (
+                      <div className="text-sm text-muted-foreground p-2 bg-green-50 rounded border border-green-200">
+                        ✓ Réservation confirmée et payée
+                      </div>
+                    )}
+                    
+                    {reservation.status === 'cancelled' && (
+                      <div className="text-sm text-muted-foreground p-2 bg-red-50 rounded border border-red-200">
+                        ✗ Réservation annulée
+                      </div>
                     )}
                   </div>
                 </CardContent>
