@@ -442,9 +442,11 @@ export default function Reservation() {
                   </Label>
                     <Select value={formData.accommodationType} onValueChange={(value) => {
                       handleInputChange("accommodationType", value);
-                      // Reset dates when accommodation type changes to refresh availability
-                      setCheckInDate(undefined);
-                      setCheckOutDate(undefined);
+                      // Trigger availability refresh without resetting dates
+                      if (checkInDate && checkOutDate) {
+                        // Force re-validation of availability with new accommodation type
+                        validateForm();
+                      }
                     }}>
                       <SelectTrigger>
                         <SelectValue placeholder="Choisir un hébergement" />
