@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import ContactFormValidated from "./ContactFormValidated";
 
 const ContactSection = () => {
   return (
@@ -89,61 +85,8 @@ const ContactSection = () => {
             </div>
           </div>
           
-          {/* Contact Form */}
-          <Card className="bg-card/70 backdrop-blur-sm border-border/50 shadow-elegant">
-            <CardContent className="p-8">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                Demande de Réservation
-              </h3>
-              
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="firstName">Prénom</Label>
-                    <Input id="firstName" placeholder="Votre prénom" />
-                  </div>
-                  <div>
-                    <Label htmlFor="lastName">Nom</Label>
-                    <Input id="lastName" placeholder="Votre nom" />
-                  </div>
-                </div>
-                
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="votre.email@example.com" />
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="checkin">Date d'arrivée</Label>
-                    <Input id="checkin" type="date" />
-                  </div>
-                  <div>
-                    <Label htmlFor="checkout">Date de départ</Label>
-                    <Input id="checkout" type="date" />
-                  </div>
-                </div>
-                
-                <div>
-                  <Label htmlFor="guests">Nombre d'invités</Label>
-                  <Input id="guests" type="number" min="1" max="10" placeholder="2" />
-                </div>
-                
-                <div>
-                  <Label htmlFor="message">Message (optionnel)</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Partagez-nous vos demandes particulières ou questions..."
-                    rows={4}
-                  />
-                </div>
-                
-                <Button variant="ocean" size="lg" className="w-full animate-pulse-glow">
-                  📞 Envoyer ma Demande de Réservation
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          {/* Contact Form with Validation */}
+          <ContactFormValidated />
         </div>
       </div>
     </section>

@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import AdminLayout from "@/components/AdminLayout";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { 
   BarChart3, 
   Users, 
@@ -18,7 +20,6 @@ import {
   RefreshCw,
   Activity
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 interface DashboardStats {
   totalUsers: number;
@@ -36,7 +37,7 @@ interface DashboardStats {
 export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
+  const { handleError } = useErrorHandler();
 
   useEffect(() => {
     fetchDashboardStats();
@@ -107,11 +108,10 @@ export default function AdminDashboard() {
         popularAccommodation: getAccommodationLabel(popularAccommodation)
       });
     } catch (error) {
-      console.error('Error fetching dashboard stats:', error);
-      toast({
-        title: "Erreur",
-        description: "Impossible de charger les statistiques",
-        variant: "destructive",
+      handleError({
+        error,
+        context: 'AdminDashboard.fetchDashboardStats',
+        userMessage: 'Impossible de charger les statistiques du tableau de bord'
       });
     } finally {
       setLoading(false);
@@ -148,12 +148,11 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center min-h-96">
-          <div className="text-center">
-            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-            <p>Chargement du tableau de bord...</p>
-          </div>
-        </div>
+        <LoadingSpinner 
+          size="lg" 
+          text="Chargement du tableau de bord..." 
+          className="min-h-96"
+        />
       </AdminLayout>
     );
   }
