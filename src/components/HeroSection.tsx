@@ -31,16 +31,14 @@ const HeroSection = () => {
           Un refuge de luxe face à la mer, où tradition et modernité se rencontrent.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20" style={{ touchAction: 'auto', pointerEvents: 'auto' }}>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20">
           <div 
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg cursor-pointer select-none"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant cursor-pointer select-none animate-pulse-glow"
             onTouchStart={(e) => {
-              console.log("TouchStart: Réserver");
               e.preventDefault();
               window.location.href = "/reservation";
             }}
             onClick={(e) => {
-              console.log("Click: Réserver");
               e.preventDefault();
               window.location.href = "/reservation";
             }}
@@ -49,8 +47,6 @@ const HeroSection = () => {
               pointerEvents: 'auto',
               position: 'relative',
               zIndex: 1000,
-              backgroundColor: '#2563eb',
-              color: 'white',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               WebkitTouchCallout: 'none'
@@ -59,9 +55,8 @@ const HeroSection = () => {
             Réserver Maintenant
           </div>
           <div 
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-white text-gray-800 border-2 border-gray-300 shadow-lg cursor-pointer select-none"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft cursor-pointer select-none"
             onTouchStart={(e) => {
-              console.log("TouchStart: Découvrir");
               e.preventDefault();
               const element = document.getElementById('hebergements');
               if (element) {
@@ -69,7 +64,6 @@ const HeroSection = () => {
               }
             }}
             onClick={(e) => {
-              console.log("Click: Découvrir");
               e.preventDefault();
               const element = document.getElementById('hebergements');
               if (element) {
@@ -81,8 +75,6 @@ const HeroSection = () => {
               pointerEvents: 'auto',
               position: 'relative',
               zIndex: 1000,
-              backgroundColor: 'white',
-              color: '#1f2937',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               WebkitTouchCallout: 'none'
