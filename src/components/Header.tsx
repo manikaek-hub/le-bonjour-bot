@@ -39,9 +39,6 @@ const Header = () => {
             <a href="#hebergements" className="text-muted-foreground hover:text-primary transition-colors">
               Hébergements
             </a>
-            <a href="#galerie" className="text-muted-foreground hover:text-primary transition-colors">
-              Galerie
-            </a>
             <a href="#region" className="text-muted-foreground hover:text-primary transition-colors">
               La Région
             </a>
@@ -73,13 +70,6 @@ const Header = () => {
                     onClick={() => setIsOpen(false)}
                   >
                     Hébergements
-                  </a>
-                  <a 
-                    href="#galerie" 
-                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Galerie
                   </a>
                   <a 
                     href="#region" 
