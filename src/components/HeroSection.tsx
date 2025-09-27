@@ -42,21 +42,24 @@ const HeroSection = () => {
           }}
         >
           {/* Version mobile uniquement - boutons avec window.open */}
-          <div className="block md:hidden w-full max-w-sm space-y-4">
+          <div className="sm:hidden w-full max-w-sm space-y-4 mx-auto">
             <div 
-              className="w-full h-14 bg-blue-600 text-white rounded-lg flex items-center justify-center text-lg font-semibold cursor-pointer active:bg-blue-700 shadow-lg"
+              className="w-full h-16 bg-red-500 text-white rounded-lg flex items-center justify-center text-xl font-bold cursor-pointer active:bg-red-600 shadow-xl border-4 border-yellow-400"
               onTouchEnd={() => window.open('/reservation', '_self')}
               onMouseDown={() => window.open('/reservation', '_self')}
+              onClick={() => window.open('/reservation', '_self')}
               style={{
                 WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none',
-                WebkitUserSelect: 'none'
+                WebkitUserSelect: 'none',
+                fontSize: '18px',
+                fontWeight: 'bold'
               }}
             >
-              📅 Réserver Maintenant
+              📅 RÉSERVER - MOBILE
             </div>
             <div 
-              className="w-full h-14 bg-white text-gray-800 border-2 border-gray-300 rounded-lg flex items-center justify-center text-lg font-semibold cursor-pointer active:bg-gray-100 shadow-lg"
+              className="w-full h-16 bg-green-500 text-white rounded-lg flex items-center justify-center text-xl font-bold cursor-pointer active:bg-green-600 shadow-xl border-4 border-blue-400"
               onTouchEnd={() => {
                 const element = document.getElementById('hebergements');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -65,13 +68,19 @@ const HeroSection = () => {
                 const element = document.getElementById('hebergements');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
+              onClick={() => {
+                const element = document.getElementById('hebergements');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+              }}
               style={{
                 WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none',
-                WebkitUserSelect: 'none'
+                WebkitUserSelect: 'none',
+                fontSize: '18px',
+                fontWeight: 'bold'
               }}
             >
-              🏖️ Découvrir
+              🏖️ DÉCOUVRIR - MOBILE
             </div>
           </div>
 
