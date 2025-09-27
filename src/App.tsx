@@ -12,6 +12,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Admin from "./pages/admin/Admin";
 import AdminReservations from "./pages/admin/AdminReservations";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminPayments from "./pages/admin/AdminPayments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/reservations" element={<AdminReservations />} />
             <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/payments" element={<AdminPayments />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
