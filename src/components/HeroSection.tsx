@@ -32,38 +32,64 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20" style={{ touchAction: 'auto', pointerEvents: 'auto' }}>
-          <a 
-            href="/reservation"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none no-underline active:scale-95"
-            aria-label="Réserver votre séjour au FortJoret Resort maintenant"
+          <div 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg cursor-pointer select-none"
+            onTouchStart={(e) => {
+              console.log("TouchStart: Réserver");
+              e.preventDefault();
+              window.location.href = "/reservation";
+            }}
+            onClick={(e) => {
+              console.log("Click: Réserver");
+              e.preventDefault();
+              window.location.href = "/reservation";
+            }}
             style={{ 
               touchAction: 'manipulation',
               pointerEvents: 'auto',
               position: 'relative',
-              zIndex: 999,
-              WebkitTapHighlightColor: 'rgba(0,0,0,0.1)',
+              zIndex: 1000,
+              backgroundColor: '#2563eb',
+              color: 'white',
               userSelect: 'none',
-              WebkitUserSelect: 'none'
+              WebkitUserSelect: 'none',
+              WebkitTouchCallout: 'none'
             }}
           >
             Réserver Maintenant
-          </a>
-          <a 
-            href="/#hebergements"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none no-underline active:scale-95"
-            aria-label="Découvrir le FortJoret Resort et ses services"
+          </div>
+          <div 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-white text-gray-800 border-2 border-gray-300 shadow-lg cursor-pointer select-none"
+            onTouchStart={(e) => {
+              console.log("TouchStart: Découvrir");
+              e.preventDefault();
+              const element = document.getElementById('hebergements');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            onClick={(e) => {
+              console.log("Click: Découvrir");
+              e.preventDefault();
+              const element = document.getElementById('hebergements');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             style={{ 
               touchAction: 'manipulation',
               pointerEvents: 'auto',
               position: 'relative',
-              zIndex: 999,
-              WebkitTapHighlightColor: 'rgba(0,0,0,0.1)',
+              zIndex: 1000,
+              backgroundColor: 'white',
+              color: '#1f2937',
               userSelect: 'none',
-              WebkitUserSelect: 'none'
+              WebkitUserSelect: 'none',
+              WebkitTouchCallout: 'none'
             }}
           >
             Découvrir
-          </a>
+          </div>
         </div>
       </div>
       
