@@ -56,7 +56,8 @@ export default function UserReservations() {
   const [cancelling, setCancelling] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (authLoading) return; // Attendre que l'authentification soit terminée
+    if (!user) {
       navigate("/auth");
     }
   }, [user, authLoading, navigate]);
@@ -283,7 +284,7 @@ export default function UserReservations() {
                       <div>
                         <p className="text-sm font-medium">Invités</p>
                         <p className="text-sm text-muted-foreground">
-                          {reservation.guests} personne{reservation.guests > 1 ? 's' : ''}
+                          {reservation.guests || 1} personne{(reservation.guests || 1) > 1 ? 's' : ''}
                         </p>
                       </div>
                     </div>
