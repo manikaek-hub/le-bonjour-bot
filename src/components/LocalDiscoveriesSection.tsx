@@ -2,13 +2,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, MapPin, Clock, Star } from "lucide-react";
+import OptimizedImage from "@/components/OptimizedImage";
+
+import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
+import fermeLocale from "@/assets/ferme-locale.jpg";
+import phareCote from "@/assets/phare-cote.jpg";
+import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
+import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
 
 const localDiscoveries = [
   {
     title: "Le Goéland 1937",
     description: "Restaurant face à la mer avec vue panoramique sur la Manche",
     category: "Restaurant",
-    image: "/api/placeholder/400/250",
+    image: restaurantVueMer,
     link: "https://www.instagram.com/legoeland1937_/?hl=fr",
     type: "instagram",
     location: "Fermanville",
@@ -19,7 +26,7 @@ const localDiscoveries = [
     title: "Ferme de Renouville",
     description: "Producteurs locaux, circuits courts et authenticité normande",
     category: "Producteur Local",
-    image: "/api/placeholder/400/250",
+    image: fermeLocale,
     link: "https://fermederenouville.com/",
     type: "website",
     location: "Renouville",
@@ -30,7 +37,7 @@ const localDiscoveries = [
     title: "Phare du Cap Lévi",
     description: "Monument historique offrant une vue imprenable sur la côte",
     category: "Patrimoine",
-    image: "/api/placeholder/400/250",
+    image: phareCote,
     link: "https://www.encotentin.fr/patrimoine-culturel/phare-du-cap-levi/",
     type: "website",
     location: "Fermanville",
@@ -41,7 +48,7 @@ const localDiscoveries = [
     title: "La Maison Rouge",
     description: "Restaurant gastronomique célébrant les saveurs du terroir",
     category: "Gastronomie",
-    image: "/api/placeholder/400/250",
+    image: restaurantGastronomique,
     link: "https://www.restaurant-lamaisonrouge.fr/",
     type: "website",
     location: "Fermanville",
@@ -52,7 +59,7 @@ const localDiscoveries = [
     title: "Maison Gosselin",
     description: "Artisan chocolatier et confiseur traditionnel normand",
     category: "Artisanat",
-    image: "/api/placeholder/400/250",
+    image: chocolatierArtisan,
     link: "https://www.maison-gosselin.fr/",
     type: "website",
     location: "Cherbourg",
@@ -83,16 +90,18 @@ export default function LocalDiscoveriesSection() {
         {/* Video Hero */}
         <div className="mb-16 animate-fade-in-up">
           <div className="relative rounded-2xl overflow-hidden shadow-large">
-            <div className="aspect-video bg-gradient-ocean flex items-center justify-center">
-              <div className="text-center text-white">
-                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-                </div>
-                <h3 className="text-2xl font-semibold mb-2">La Pointe du Cotentin</h3>
-                <p className="text-white/80">Découvrez la beauté sauvage de notre région</p>
-              </div>
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&modestbranding=1"
+              title="La beauté du Cotentin"
+              className="w-full aspect-video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+            <div className="absolute bottom-6 left-6 text-white">
+              <h3 className="text-2xl font-semibold mb-2">La Pointe du Cotentin</h3>
+              <p className="text-white/80">Découvrez la beauté sauvage de notre région</p>
             </div>
-            <div className="absolute inset-0 bg-black/20"></div>
           </div>
         </div>
 
@@ -106,7 +115,11 @@ export default function LocalDiscoveriesSection() {
               onClick={() => handleDiscoveryClick(discovery.link)}
             >
               <div className="relative overflow-hidden">
-                <div className="aspect-video bg-gradient-nature"></div>
+                <OptimizedImage
+                  src={discovery.image}
+                  alt={discovery.title}
+                  className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                />
                 <div className="absolute top-4 left-4">
                   <Badge variant="secondary" className="bg-white/90 text-foreground">
                     {discovery.category}
