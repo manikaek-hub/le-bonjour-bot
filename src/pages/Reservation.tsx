@@ -85,11 +85,8 @@ export default function Reservation() {
     specialRequests: "",
   });
 
-  useEffect(() => {
-    if (!authLoading && !user) {
-      navigate("/auth");
-    }
-  }, [user, authLoading, navigate]);
+  // Permettre la consultation de la page sans authentification
+  // L'utilisateur sera redirigé vers /auth seulement lors de la soumission
 
   const validateForm = async () => {
     const newErrors: Record<string, string> = {};
@@ -164,9 +161,19 @@ export default function Reservation() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Si l'utilisateur n'est pas connecté, rediriger vers l'authentification
+    if (!user) {
+      toast({
+        title: "Connexion requise",
+        description: "Veuillez vous connecter pour finaliser votre réservation.",
+      });
+      navigate("/auth");
+      return;
+    }
+    
     const isValid = await validateForm();
     if (!isValid) return;
-    if (!user || !checkInDate || !checkOutDate) return;
+    if (!checkInDate || !checkOutDate) return;
 
     setLoading(true);
 
@@ -304,9 +311,7 @@ export default function Reservation() {
     return <div className="min-h-screen flex items-center justify-center">Chargement...</div>;
   }
 
-  if (!user) {
-    return null;
-  }
+  // Permettre l'affichage de la page même sans utilisateur connecté
 
   const totalPrice = calculateTotalPrice();
 
