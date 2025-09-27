@@ -41,46 +41,97 @@ const HeroSection = () => {
             touchAction: 'auto'
           }}
         >
-          {/* Version mobile uniquement - boutons avec window.open */}
-          <div className="sm:hidden w-full max-w-sm space-y-4 mx-auto">
-            <div 
-              className="w-full h-16 bg-red-500 text-white rounded-lg flex items-center justify-center text-xl font-bold cursor-pointer active:bg-red-600 shadow-xl border-4 border-yellow-400"
-              onTouchEnd={() => window.open('/reservation', '_self')}
-              onMouseDown={() => window.open('/reservation', '_self')}
-              onClick={() => window.open('/reservation', '_self')}
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                fontSize: '18px',
-                fontWeight: 'bold'
-              }}
-            >
-              📅 RÉSERVER - MOBILE
-            </div>
-            <div 
-              className="w-full h-16 bg-green-500 text-white rounded-lg flex items-center justify-center text-xl font-bold cursor-pointer active:bg-green-600 shadow-xl border-4 border-blue-400"
-              onTouchEnd={() => {
-                const element = document.getElementById('hebergements');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              onMouseDown={() => {
-                const element = document.getElementById('hebergements');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              onClick={() => {
-                const element = document.getElementById('hebergements');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                fontSize: '18px',
-                fontWeight: 'bold'
-              }}
-            >
-              🏖️ DÉCOUVRIR - MOBILE
+          {/* BOUTONS FORCÉS - CSS INLINE UNIQUEMENT */}
+          <div style={{
+            display: 'block',
+            width: '100%',
+            maxWidth: '400px',
+            margin: '0 auto'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}>
+              <div 
+                style={{
+                  width: '100%',
+                  height: '60px',
+                  backgroundColor: '#ff0000',
+                  color: 'white',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  border: '4px solid #ffff00',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  position: 'relative',
+                  zIndex: 99999
+                }}
+                onTouchStart={() => console.log('TOUCH RED BUTTON')}
+                onTouchEnd={() => window.location.href = '/reservation'}
+                onMouseDown={() => window.location.href = '/reservation'}
+                onClick={() => window.location.href = '/reservation'}
+              >
+                🔴 RÉSERVER MAINTENANT 🔴
+              </div>
+              
+              <div 
+                style={{
+                  width: '100%',
+                  height: '60px',
+                  backgroundColor: '#00ff00',
+                  color: 'black',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  border: '4px solid #0000ff',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  position: 'relative',
+                  zIndex: 99999
+                }}
+                onTouchStart={() => console.log('TOUCH GREEN BUTTON')}
+                onTouchEnd={() => {
+                  const element = document.getElementById('hebergements');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+                onMouseDown={() => {
+                  const element = document.getElementById('hebergements');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+                onClick={() => {
+                  const element = document.getElementById('hebergements');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                🟢 DÉCOUVRIR LA RÉGION 🟢
+              </div>
+              
+              {/* Message de debug */}
+              <div style={{
+                color: 'white',
+                background: 'rgba(0,0,0,0.8)',
+                padding: '8px',
+                fontSize: '12px',
+                textAlign: 'center',
+                borderRadius: '4px',
+                marginTop: '10px'
+              }}>
+                ✅ Si vous voyez ce message, le code fonctionne
+              </div>
             </div>
           </div>
 
