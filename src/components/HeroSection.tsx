@@ -14,7 +14,15 @@ const HeroSection = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-cursive font-bold mb-6 leading-tight" style={{ color: 'hsl(45, 85%, 50%)' }}>
+        <h1 
+          className="text-5xl md:text-7xl font-cursive font-bold mb-6 leading-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent"
+          style={{ 
+            background: 'linear-gradient(135deg, hsl(45, 85%, 50%) 0%, hsl(50, 90%, 60%) 50%, hsl(0, 0%, 95%) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}
+        >
           FortJoret Resort
         </h1>
         <p className="text-xl md:text-2xl text-white/90 mb-4 font-light">
