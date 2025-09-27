@@ -16,6 +16,10 @@ import AdminReservations from "./pages/admin/AdminReservations";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminPayments from "./pages/admin/AdminPayments";
 import NotFound from "./pages/NotFound";
+import ConditionsGenerales from "./pages/ConditionsGenerales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import MentionsLegales from "./pages/MentionsLegales";
+import Annulation from "./pages/Annulation";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +36,10 @@ const App = () => (
             <Route path="/reservation" element={<Reservation />} />
             <Route path="/mes-reservations" element={<UserReservations />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/conditions-generales" element={<ConditionsGenerales />} />
+            <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
+            <Route path="/annulation" element={<Annulation />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/reservations" element={<AdminReservations />} />
