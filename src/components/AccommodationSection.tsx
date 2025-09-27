@@ -18,6 +18,7 @@ const AccommodationSection = () => {
   const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
   
   // Images pour la maison 70m² (5 personnes)
+  // Maison 1 - Vue panoramique en hauteur sur roche blanche et une vue à 180° de la mer
   const images1 = [
     { src: bedroomTropical, alt: "Chambre avec papier peint tropical" },
     { src: livingRoom, alt: "Salon avec mur bleu canard" },
@@ -29,6 +30,7 @@ const AccommodationSection = () => {
   ];
 
   // Images pour la maison 40m² (2 adultes + 3 enfants)
+  // Maison 2 - Charme des tomettes anciennes, du parquet en bois, zelliges marocains de la salle de bain
   const images2 = [
     { src: bedroomLoft, alt: "Chambre sous les combles" },
     { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" }
