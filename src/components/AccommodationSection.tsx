@@ -273,7 +273,7 @@ const AccommodationSection = () => {
                 avec vue sur la mer.
               </p>
               <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
-                Configuration idéale pour les parents avec enfants, à proximité 
+                Configuration idéale pour les parents avec jeunes enfants, à proximité 
                 immédiate de la plage et des sentiers côtiers.
               </p>
             </div>
