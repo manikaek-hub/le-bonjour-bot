@@ -8,7 +8,7 @@ import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
 import fermeRenouville from "@/assets/ferme-renouville.jpg";
 import phareCapLevi from "@/assets/phare-cap-levi.jpg";
 import maisonRouge from "@/assets/maison-rouge.jpg";
-import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
+import maisonGosselin from "@/assets/maison-gosselin.jpg";
 import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
 import goelandLogo from "@/assets/goeland-logo.png";
 
@@ -60,12 +60,12 @@ const localDiscoveries = [
   },
   {
     title: "Maison Gosselin",
-    description: "Artisan chocolatier et confiseur traditionnel normand",
+    description: "Épicerie Fine dans la Manche située à Saint-Vaast-la-Hougue, conseille et vend des produits d'une qualité rare",
     category: "Artisanat",
-    image: chocolatierArtisan,
+    image: maisonGosselin,
     link: "https://www.maison-gosselin.fr/",
     type: "website",
-    location: "Cherbourg",
+    location: "Saint-Vaast-la-Hougue",
     rating: 4.9,
     openingHours: "9h-19h"
   }
