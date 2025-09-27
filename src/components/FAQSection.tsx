@@ -21,7 +21,7 @@ const FAQSection = () => {
     },
     {
       question: "Le logement est-il adapté aux familles avec enfants ?",
-      answer: "Tout à fait ! Avec 2 chambres (1 lit 160cm + 3 lits 90cm), le logement peut accueillir confortablement une famille. La plage à proximité est idéale pour les enfants."
+      answer: "Parfaitement ! Nous proposons 2 maisons (36 et 55 Fort Joret) avec un total de 2 chambres (1 lit 160cm + 3 lits 90cm) pouvant accueillir confortablement une famille. Chaque logement dispose d'un jardin privé, et nous mettons à disposition des jeux et livres pour enfants. La plage à proximité immédiate est idéale pour les petits."
     },
     {
       question: "Que comprend la cuisine équipée ?",
