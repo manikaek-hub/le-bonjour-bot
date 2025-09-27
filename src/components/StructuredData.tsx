@@ -18,7 +18,7 @@ const StructuredData = () => {
       "longitude": "-1.6500"
     },
     "url": "https://fortjoret-resort.lovable.app",
-    "telephone": "+33233XXXXXX",
+    "telephone": "+33761976041",
     "email": "contact@fortjoret-resort.fr",
     "starRating": {
       "@type": "Rating",

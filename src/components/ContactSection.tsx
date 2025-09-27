@@ -31,10 +31,11 @@ const ContactSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Adresse</h4>
+                    <h4 className="font-semibold text-foreground mb-1">Nos Adresses</h4>
                     <p className="text-muted-foreground">
-                      FortJoret Resort<br />
-                      Fermanville, 50840<br />
+                      <strong>Maison 1 :</strong> 36 Fort Joret<br />
+                      <strong>Maison 2 :</strong> 55 Fort Joret<br />
+                      50840 Fermanville<br />
                       Normandie, France
                     </p>
                   </div>
@@ -60,7 +61,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Téléphone</h4>
-                    <p className="text-muted-foreground">+33 (0)2 33 XX XX XX</p>
+                    <p className="text-muted-foreground">07 61 97 60 41</p>
                   </div>
                 </div>
               </div>
