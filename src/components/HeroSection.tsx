@@ -4,8 +4,9 @@ const HeroSection = () => {
   return (
     <section 
       id="accueil" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center"
       aria-label="Section d'accueil du FortJoret Resort"
+      style={{ touchAction: 'auto' }}
     >
       {/* Background Image */}
       <div 
@@ -30,29 +31,35 @@ const HeroSection = () => {
           Un refuge de luxe face à la mer, où tradition et modernité se rencontrent.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20" style={{ touchAction: 'auto', pointerEvents: 'auto' }}>
           <a 
             href="/reservation"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none no-underline"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none no-underline active:scale-95"
             aria-label="Réserver votre séjour au FortJoret Resort maintenant"
             style={{ 
               touchAction: 'manipulation',
               pointerEvents: 'auto',
               position: 'relative',
-              zIndex: 30
+              zIndex: 999,
+              WebkitTapHighlightColor: 'rgba(0,0,0,0.1)',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
             }}
           >
             Réserver Maintenant
           </a>
           <a 
             href="/#hebergements"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none no-underline"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none no-underline active:scale-95"
             aria-label="Découvrir le FortJoret Resort et ses services"
             style={{ 
               touchAction: 'manipulation',
               pointerEvents: 'auto',
               position: 'relative',
-              zIndex: 30
+              zIndex: 999,
+              WebkitTapHighlightColor: 'rgba(0,0,0,0.1)',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
             }}
           >
             Découvrir
