@@ -1,0 +1,182 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Calendar, MapPin, Euro } from "lucide-react";
+
+const events = [
+  {
+    title: "Drheam Cup",
+    description: "Compétition nautique internationale dans le port de Cherbourg",
+    category: "Nautisme",
+    dates: "11-15 juillet 2024",
+    location: "Cherbourg-en-Cotentin",
+    price: "Gratuit",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/drheam-cup/"
+  },
+  {
+    title: "Aoûtcider",
+    description: "Festival célébrant le cidre et les traditions normandes",
+    category: "Gastronomie",
+    dates: "31 août 2024",
+    location: "Rauville la Bigot",
+    price: "Gratuit",
+    image: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/aoutcider/"
+  },
+  {
+    title: "Grand Océan",
+    description: "Festival maritime et culturel du Cotentin",
+    category: "Nautisme",
+    dates: "13-15 septembre 2024",
+    location: "Cotentin",
+    price: "Gratuit",
+    image: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/grand-ocean/"
+  },
+  {
+    title: "L'été indien des Fieffés",
+    description: "Festival de musique et d'artisanat local",
+    category: "Art et artisanat",
+    dates: "14-22 septembre 2024",
+    location: "Cotentin",
+    price: "Variable",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/les-fieffes-musiciens/"
+  },
+  {
+    title: "Journées du Patrimoine",
+    description: "Découverte exceptionnelle du patrimoine cotentinais",
+    category: "Patrimoine",
+    dates: "21-22 septembre 2024",
+    location: "Cotentin",
+    price: "Gratuit",
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/les-journees-du-patrimoine/"
+  },
+  {
+    title: "Noël en Cotentin",
+    description: "Festivités et marchés de Noël traditionnels",
+    category: "Gastronomie",
+    dates: "30 nov 2024 - 6 jan 2025",
+    location: "Cherbourg-en-Cotentin",
+    price: "Gratuit",
+    image: "https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=800&h=600&fit=crop",
+    link: "https://www.encotentin.fr/temps-fort/noel-en-cotentin/"
+  }
+];
+
+const categoryColors = {
+  "Nautisme": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  "Gastronomie": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+  "Patrimoine": "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+  "Art et artisanat": "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  "Sport": "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+};
+
+export default function EventsSection() {
+  const handleEventClick = (link: string) => {
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <section className="py-20 bg-background">
+      <div className="container mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-ocean bg-clip-text text-transparent">
+            Événements du Cotentin
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Découvrez les temps forts de notre région. Des événements authentiques qui rythment 
+            la vie cotentinaise et enrichiront votre séjour d'expériences inoubliables.
+          </p>
+        </div>
+
+        {/* Events Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {events.map((event, index) => (
+            <Card 
+              key={event.title}
+              className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => handleEventClick(event.link)}
+            >
+              <div className="relative overflow-hidden">
+                <img 
+                  src={event.image}
+                  alt={event.title}
+                  className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-4 left-4">
+                  <Badge 
+                    variant="secondary" 
+                    className={`${categoryColors[event.category as keyof typeof categoryColors]} border-0`}
+                  >
+                    {event.category}
+                  </Badge>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                    <ExternalLink className="w-4 h-4 text-foreground" />
+                  </div>
+                </div>
+              </div>
+              
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-3">
+                  {event.title}
+                </h3>
+                
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  {event.description}
+                </p>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Calendar className="w-4 h-4" />
+                    <span>{event.dates}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="w-4 h-4" />
+                    <span>{event.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Euro className="w-4 h-4" />
+                    <span>{event.price}</span>
+                  </div>
+                </div>
+                
+                <Button 
+                  variant="outline" 
+                  className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
+                >
+                  En savoir plus
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center animate-fade-in-up">
+          <div className="bg-card rounded-2xl p-8 shadow-medium">
+            <h3 className="text-2xl font-semibold mb-4">Plus d'événements sur le site officiel</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Consultez le site officiel du Cotentin pour découvrir tous les événements, 
+              festivals et animations qui vous attendent pendant votre séjour.
+            </p>
+            <Button 
+              className="bg-gradient-ocean text-white hover:opacity-90"
+              onClick={() => window.open('https://www.encotentin.fr/evenements/temps-forts/', '_blank')}
+            >
+              Voir tous les événements
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
