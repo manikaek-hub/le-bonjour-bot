@@ -1,23 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 
 const HeroSection = () => {
-  const navigate = useNavigate();
-
-  const handleReservationClick = () => {
-    console.log("Bouton réservation cliqué");
-    navigate("/reservation");
-  };
-
-  const handleDiscoverClick = () => {
-    console.log("Bouton découvrir cliqué");
-    const element = document.getElementById('hebergements');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section 
       id="accueil" 
@@ -47,25 +30,33 @@ const HeroSection = () => {
           Un refuge de luxe face à la mer, où tradition et modernité se rencontrent.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button 
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none"
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20">
+          <a 
+            href="/reservation"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] animate-pulse-glow touch-manipulation select-none no-underline"
             aria-label="Réserver votre séjour au FortJoret Resort maintenant"
-            onClick={handleReservationClick}
-            onTouchEnd={handleReservationClick}
-            style={{ touchAction: 'manipulation' }}
+            style={{ 
+              touchAction: 'manipulation',
+              pointerEvents: 'auto',
+              position: 'relative',
+              zIndex: 30
+            }}
           >
             Réserver Maintenant
-          </button>
-          <button 
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none"
+          </a>
+          <a 
+            href="/#hebergements"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant touch-manipulation select-none no-underline"
             aria-label="Découvrir le FortJoret Resort et ses services"
-            onClick={handleDiscoverClick}
-            onTouchEnd={handleDiscoverClick}
-            style={{ touchAction: 'manipulation' }}
+            style={{ 
+              touchAction: 'manipulation',
+              pointerEvents: 'auto',
+              position: 'relative',
+              zIndex: 30
+            }}
           >
             Découvrir
-          </button>
+          </a>
         </div>
       </div>
       
