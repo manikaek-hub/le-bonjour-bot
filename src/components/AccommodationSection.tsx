@@ -19,7 +19,7 @@ const AccommodationSection = () => {
   const [currentImageIndex2, setCurrentImageIndex2] = useState(0);
   
   // Images pour la maison 70m² (5 personnes)
-  // Maison 1 - Vue panoramique en hauteur sur roche blanche et une vue à 180° de l'océan
+  // Maison 1 - Vue panoramique en hauteur sur roche blanche et une vue à 180° de la mer
   const images1 = [
     { src: bedroomTropical, alt: "Chambre avec papier peint tropical" },
     { src: livingRoom, alt: "Salon avec mur bleu canard" },
@@ -64,7 +64,7 @@ const AccommodationSection = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Deux logements exceptionnels alliant charme normand et confort moderne, 
-            pour une expérience inoubliable en bord d'océan.
+            pour une expérience inoubliable en bord de mer.
           </p>
         </div>
         
@@ -115,7 +115,7 @@ const AccommodationSection = () => {
           <div className="space-y-6 flex flex-col h-full">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Maison Vue Océan 70m² - 5 personnes
+                Maison Vue Mer 70m² - 5 personnes
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Spacieuse maison de 70m² avec vue plongeante sur la côte sauvage de Fermanville. 
@@ -158,7 +158,7 @@ const AccommodationSection = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Vue océan panoramique</span>
+                <span className="text-muted-foreground">Vue mer panoramique</span>
               </div>
             </div>
             
@@ -271,10 +271,10 @@ const AccommodationSection = () => {
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Charmante maison de 55m² spécialement conçue pour les familles avec jeunes enfants. 
                 Située les pieds dans l'eau avec un accès direct à la plage depuis le jardin, 
-                elle offre un cadre privilégié pour des vacances sereines en bord d'océan.
+                elle offre un cadre privilégié pour des vacances sereines en bord de mer.
               </p>
               <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
-                Espace optimisé et chaleureux avec vue panoramique sur l'océan, 
+                Espace optimisé et chaleureux avec vue panoramique sur la mer, 
                 à deux pas des sentiers côtiers pour vos balades matinales.
               </p>
             </div>
@@ -293,7 +293,7 @@ const AccommodationSection = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Salon vue sur l'océan ouvert sur cuisine équipée</span>
+                <span className="text-muted-foreground">Salon vue sur la mer ouvert sur cuisine équipée</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
