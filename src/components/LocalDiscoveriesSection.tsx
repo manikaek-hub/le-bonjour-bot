@@ -68,6 +68,28 @@ const localDiscoveries = [
     location: "Saint-Vaast-la-Hougue",
     rating: 4.9,
     openingHours: "9h-19h"
+  },
+  {
+    title: "Marché du Dimanche",
+    description: "Marché traditionnel avec producteurs locaux et artisans",
+    category: "Marché Local",
+    image: fermeRenouville, // Réutilise l'image de la ferme
+    link: "#",
+    type: "local",
+    location: "Place du Tôt de Haut, à côté de l'Escale",
+    rating: 4.7,
+    openingHours: "Dimanche 8h30-12h30"
+  },
+  {
+    title: "Marché de Saint-Pierre-Église",
+    description: "Marché municipal, une véritable institution locale ! Au cœur du bourg",
+    category: "Marché Local",
+    image: fermeRenouville, // Réutilise l'image de la ferme
+    link: "#",
+    type: "local",
+    location: "Place de l'abbé de Saint-Pierre",
+    rating: 4.8,
+    openingHours: "Mercredi 8h30-13h00"
   }
 ];
 

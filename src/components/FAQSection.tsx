@@ -32,6 +32,10 @@ const FAQSection = () => {
       answer: "Oui, le village de Fermanville dispose de commerces de proximité (boulangerie, épicerie). Pour plus de choix, Cherbourg se trouve à 15 minutes en voiture."
     },
     {
+      question: "Quand ont lieu les marchés locaux ?",
+      answer: "Deux marchés traditionnels vous attendent : le marché du dimanche de 8h30 à 12h30 place du Tôt de Haut (à côté de l'Escale), et le marché municipal de Saint-Pierre-Église le mercredi matin de 8h30 à 13h00 sur la place de l'abbé de Saint-Pierre. Une belle occasion de découvrir les produits locaux !"
+    },
+    {
       question: "Peut-on utiliser la cheminée ?",
       answer: "Bien sûr ! La cheminée fonctionne parfaitement et nous fournissons le bois nécessaire. Rien de tel qu'une soirée au coin du feu avec le bruit des vagues en fond sonore !"
     },
