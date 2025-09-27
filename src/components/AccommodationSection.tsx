@@ -267,7 +267,7 @@ const AccommodationSection = () => {
                 Petite Maison les pieds dans l'eau
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Maison cosy de 40m² parfaitement adaptée aux familles avec enfants. 
+                Maison cosy de 55m² parfaitement adaptée aux familles avec enfants. 
                 La plage est au bout du jardin, idéal pour les jeux de sable pour les enfants.
                 Offre tout le confort nécessaire dans un espace optimisé et chaleureux 
                 avec vue sur la mer.
@@ -280,7 +280,7 @@ const AccommodationSection = () => {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-primary mb-1">40m²</div>
+                <div className="text-2xl font-bold text-primary mb-1">55m²</div>
                 <div className="text-sm text-muted-foreground">Surface</div>
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 text-center">
@@ -292,19 +292,23 @@ const AccommodationSection = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Salon avec cheminée</span>
+                <span className="text-muted-foreground">Salon vue sur la mer ouvert sur cuisine équipée</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">1 chambre parentale + coin enfants</span>
+                <span className="text-muted-foreground">Chambre parentale 40m² au sol sous pente</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Kitchenette équipée</span>
+                <span className="text-muted-foreground">Coin enfants (3 lits superposés)</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span className="text-muted-foreground">Salle de bain fonctionnelle</span>
+                <span className="text-muted-foreground">Salle TV</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-muted-foreground">Petite douche italienne</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full"></div>
