@@ -10,6 +10,8 @@ import entranceTiles from "@/assets/entrance-tiles.jpg";
 import bedroomMultiple from "@/assets/bedroom-multiple.jpg";
 import fireplaceDetail from "@/assets/fireplace-detail.jpg";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
+import maison2Sunset from "@/assets/maison2-sunset.jpg";
+import maison2Terrain from "@/assets/maison2-terrain.jpeg";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -35,7 +37,9 @@ const AccommodationSection = () => {
   // Terrain de pétanque et un grand terrain de 1500m²
   const images2 = [
     { src: bedroomLoft, alt: "Chambre sous les combles" },
-    { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" }
+    { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" },
+    { src: maison2Sunset, alt: "Coucher de soleil face à la maison" },
+    { src: maison2Terrain, alt: "Grand terrain de 1500m² avec vue mer" }
   ];
 
   const nextImage1 = () => {
