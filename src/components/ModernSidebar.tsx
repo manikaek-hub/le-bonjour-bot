@@ -63,7 +63,7 @@ export function ModernSidebar() {
   const getNavClassName = (path: string) => cn(
     "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
     isActive(path)
-      ? "bg-gradient-instagram text-white shadow-medium"
+      ? "bg-gradient-ocean text-white shadow-medium"
       : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
   );
 
@@ -80,12 +80,12 @@ export function ModernSidebar() {
       <SidebarContent className="p-4 space-y-6">
         {/* Logo */}
         <div className="flex items-center gap-3 px-3 py-2">
-          <div className="w-8 h-8 bg-gradient-instagram rounded-xl flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-ocean rounded-xl flex items-center justify-center">
             <Heart className="w-4 h-4 text-white" />
           </div>
           {!collapsed && (
             <div>
-              <h1 className="font-bold text-lg bg-gradient-instagram bg-clip-text text-transparent">
+              <h1 className="font-bold text-lg bg-gradient-ocean bg-clip-text text-transparent">
                 FortJoret
               </h1>
               <p className="text-xs text-muted-foreground">Resort</p>
@@ -111,7 +111,7 @@ export function ModernSidebar() {
                         <span className="truncate">{item.title}</span>
                       )}
                       {isActive(item.url) && (
-                        <div className="absolute inset-0 bg-gradient-instagram rounded-xl opacity-0 group-hover:opacity-10 transition-opacity" />
+                        <div className="absolute inset-0 bg-gradient-ocean rounded-xl opacity-0 group-hover:opacity-10 transition-opacity" />
                       )}
                     </NavLink>
                   </SidebarMenuButton>

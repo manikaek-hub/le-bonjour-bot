@@ -61,7 +61,7 @@ export default function ModernHeader() {
                   {/* Quick reserve button */}
                   <Button
                     onClick={() => navigate("/reservation")}
-                    className="bg-gradient-instagram hover:opacity-90 text-white border-0 shadow-medium hidden md:flex"
+                    className="bg-gradient-ocean hover:opacity-90 text-white border-0 shadow-medium hidden md:flex"
                   >
                     <Heart className="w-4 h-4 mr-2" />
                     Réserver
@@ -72,7 +72,7 @@ export default function ModernHeader() {
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
                         <Avatar className="h-10 w-10 ring-2 ring-primary/20">
-                          <AvatarFallback className="bg-gradient-instagram text-white text-sm font-medium">
+                          <AvatarFallback className="bg-gradient-ocean text-white text-sm font-medium">
                             {getInitials(user.email)}
                           </AvatarFallback>
                         </Avatar>
@@ -121,7 +121,7 @@ export default function ModernHeader() {
                   </Link>
                   <Button
                     onClick={() => navigate("/reservation")}
-                    className="bg-gradient-instagram hover:opacity-90 text-white border-0 shadow-medium"
+                    className="bg-gradient-ocean hover:opacity-90 text-white border-0 shadow-medium"
                   >
                     <Heart className="w-4 h-4 mr-2" />
                     Réserver
