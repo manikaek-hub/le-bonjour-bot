@@ -49,6 +49,10 @@ const HeroSection = () => {
             size="xl" 
             className="min-w-[200px]"
             aria-label="Découvrir le FortJoret Resort et ses services"
+            onClick={() => {
+              const element = document.getElementById('hebergements');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             Découvrir
           </Button>
