@@ -57,8 +57,8 @@ const HeroSection = () => {
             touchAction: 'auto'
           }}
         >
-          {/* BOUTONS FONCTIONNELS - Design original restauré */}
-          <div style={{
+          {/* BOUTONS MOBILES UNIQUEMENT */}
+          <div className="md:hidden" style={{
             display: 'block',
             width: '100%',
             maxWidth: '400px',
