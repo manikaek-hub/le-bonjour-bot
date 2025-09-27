@@ -112,7 +112,7 @@ const AccommodationSection = () => {
             </Card>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-6 flex flex-col h-full">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Maison Vue Mer 70m² - 5 personnes
@@ -162,56 +162,58 @@ const AccommodationSection = () => {
               </div>
             </div>
             
-            <div 
-              style={{
-                width: '100%',
-                maxWidth: '300px'
-              }}
-            >
-              <div
+            <div className="mt-auto pt-6">
+              <div 
                 style={{
                   width: '100%',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
-                  color: 'white',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
-                  WebkitTapHighlightColor: 'transparent',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  position: 'relative',
-                  zIndex: 999,
-                  touchAction: 'manipulation',
-                  transition: 'all 0.3s ease'
-                }}
-                onTouchStart={() => {
-                  console.log('TOUCH MAISON 70M²');
-                }}
-                onTouchEnd={(e) => {
-                  console.log('TOUCH END MAISON 70M²');
-                  e.preventDefault();
-                  setTimeout(() => {
-                    window.location.href = '/reservation';
-                  }, 100);
-                }}
-                onMouseDown={(e) => {
-                  console.log('MOUSE DOWN MAISON 70M²');
-                  e.preventDefault();
-                  window.location.href = '/reservation';
-                }}
-                onClick={(e) => {
-                  console.log('CLICK MAISON 70M²');
-                  e.preventDefault();
-                  window.location.href = '/reservation';
+                  maxWidth: '300px'
                 }}
               >
-                🏡 Réserver cette maison
+                <div
+                  style={{
+                    width: '100%',
+                    height: '50px',
+                    background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
+                    color: 'white',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    position: 'relative',
+                    zIndex: 999,
+                    touchAction: 'manipulation',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onTouchStart={() => {
+                    console.log('TOUCH MAISON 70M²');
+                  }}
+                  onTouchEnd={(e) => {
+                    console.log('TOUCH END MAISON 70M²');
+                    e.preventDefault();
+                    setTimeout(() => {
+                      window.location.href = '/reservation';
+                    }, 100);
+                  }}
+                  onMouseDown={(e) => {
+                    console.log('MOUSE DOWN MAISON 70M²');
+                    e.preventDefault();
+                    window.location.href = '/reservation';
+                  }}
+                  onClick={(e) => {
+                    console.log('CLICK MAISON 70M²');
+                    e.preventDefault();
+                    window.location.href = '/reservation';
+                  }}
+                >
+                  🏡 Réserver cette maison
+                </div>
               </div>
             </div>
           </div>
@@ -261,7 +263,7 @@ const AccommodationSection = () => {
             </Card>
           </div>
           
-          <div className="space-y-6 md:order-1">
+          <div className="space-y-6 md:order-1 flex flex-col h-full">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Petite Maison les pieds dans l'eau
@@ -316,56 +318,58 @@ const AccommodationSection = () => {
               </div>
             </div>
             
-            <div 
-              style={{
-                width: '100%',
-                maxWidth: '300px'
-              }}
-            >
-              <div
+            <div className="mt-auto pt-6">
+              <div 
                 style={{
                   width: '100%',
-                  height: '50px',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
-                  color: 'white',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
-                  WebkitTapHighlightColor: 'transparent',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  position: 'relative',
-                  zIndex: 999,
-                  touchAction: 'manipulation',
-                  transition: 'all 0.3s ease'
-                }}
-                onTouchStart={() => {
-                  console.log('TOUCH MAISON 40M²');
-                }}
-                onTouchEnd={(e) => {
-                  console.log('TOUCH END MAISON 40M²');
-                  e.preventDefault();
-                  setTimeout(() => {
-                    window.location.href = '/reservation';
-                  }, 100);
-                }}
-                onMouseDown={(e) => {
-                  console.log('MOUSE DOWN MAISON 40M²');
-                  e.preventDefault();
-                  window.location.href = '/reservation';
-                }}
-                onClick={(e) => {
-                  console.log('CLICK MAISON 40M²');
-                  e.preventDefault();
-                  window.location.href = '/reservation';
+                  maxWidth: '300px'
                 }}
               >
-                👨‍👩‍👧‍👦 Réserver pour famille
+                <div
+                  style={{
+                    width: '100%',
+                    height: '50px',
+                    background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
+                    color: 'white',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    boxShadow: '0 6px 20px -6px hsl(var(--primary) / 0.4)',
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    position: 'relative',
+                    zIndex: 999,
+                    touchAction: 'manipulation',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onTouchStart={() => {
+                    console.log('TOUCH MAISON 40M²');
+                  }}
+                  onTouchEnd={(e) => {
+                    console.log('TOUCH END MAISON 40M²');
+                    e.preventDefault();
+                    setTimeout(() => {
+                      window.location.href = '/reservation';
+                    }, 100);
+                  }}
+                  onMouseDown={(e) => {
+                    console.log('MOUSE DOWN MAISON 40M²');
+                    e.preventDefault();
+                    window.location.href = '/reservation';
+                  }}
+                  onClick={(e) => {
+                    console.log('CLICK MAISON 40M²');
+                    e.preventDefault();
+                    window.location.href = '/reservation';
+                  }}
+                >
+                  👨‍👩‍👧‍👦 Réserver pour famille
+                </div>
               </div>
             </div>
           </div>
