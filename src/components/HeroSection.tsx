@@ -14,7 +14,7 @@ const HeroSection = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-cursive font-bold text-white mb-6 leading-tight">
+        <h1 className="text-5xl md:text-7xl font-cursive font-bold mb-6 leading-tight" style={{ color: 'hsl(45, 85%, 50%)' }}>
           FortJoret Resort
         </h1>
         <p className="text-xl md:text-2xl text-white/90 mb-4 font-light">
