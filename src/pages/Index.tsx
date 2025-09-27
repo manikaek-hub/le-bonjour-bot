@@ -6,6 +6,7 @@ import AccommodationSection from "@/components/AccommodationSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import RegionSection from "@/components/RegionSection";
+import GalerieSection from "@/components/GalerieSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -26,6 +27,7 @@ const Index = () => {
         <main className="min-h-screen bg-background">
           <HeroSection />
           <AccommodationSection />
+          <GalerieSection />
           <LocalDiscoveriesSection />
           <EventsSection />
           <WhyChooseUsSection />
