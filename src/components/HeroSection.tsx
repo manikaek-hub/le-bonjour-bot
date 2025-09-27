@@ -1,6 +1,22 @@
+import { useEffect } from "react";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 
 const HeroSection = () => {
+  useEffect(() => {
+    // Afficher les informations de debug après le chargement
+    const updateDebugInfo = () => {
+      const screenWidth = document.getElementById('screen-width');
+      const viewportWidth = document.getElementById('viewport-width');
+      if (screenWidth) screenWidth.textContent = screen.width.toString();
+      if (viewportWidth) viewportWidth.textContent = window.innerWidth.toString();
+    };
+    
+    updateDebugInfo();
+    window.addEventListener('resize', updateDebugInfo);
+    
+    return () => window.removeEventListener('resize', updateDebugInfo);
+  }, []);
+
   return (
     <section 
       id="accueil" 
@@ -41,12 +57,12 @@ const HeroSection = () => {
             touchAction: 'auto'
           }}
         >
-          {/* BOUTONS FORCÉS - CSS INLINE UNIQUEMENT */}
+          {/* BOUTONS VISIBLES PARTOUT - DESKTOP ET MOBILE */}
           <div style={{
-            display: 'block',
+            display: 'block', // Toujours visible
             width: '100%',
             maxWidth: '400px',
-            margin: '0 auto'
+            margin: '20px auto 0 auto'
           }}>
             <div style={{
               display: 'flex',
@@ -72,7 +88,8 @@ const HeroSection = () => {
                   userSelect: 'none',
                   WebkitUserSelect: 'none',
                   position: 'relative',
-                  zIndex: 99999
+                  zIndex: 99999,
+                  touchAction: 'manipulation'
                 }}
                 onTouchStart={() => console.log('TOUCH RED BUTTON')}
                 onTouchEnd={() => window.location.href = '/reservation'}
@@ -101,7 +118,8 @@ const HeroSection = () => {
                   userSelect: 'none',
                   WebkitUserSelect: 'none',
                   position: 'relative',
-                  zIndex: 99999
+                  zIndex: 99999,
+                  touchAction: 'manipulation'
                 }}
                 onTouchStart={() => console.log('TOUCH GREEN BUTTON')}
                 onTouchEnd={() => {
@@ -120,17 +138,20 @@ const HeroSection = () => {
                 🟢 DÉCOUVRIR LA RÉGION 🟢
               </div>
               
-              {/* Message de debug */}
+              {/* Message de debug - TOUJOURS visible */}
               <div style={{
                 color: 'white',
-                background: 'rgba(0,0,0,0.8)',
-                padding: '8px',
-                fontSize: '12px',
+                background: 'rgba(0,0,0,0.9)',
+                padding: '12px',
+                fontSize: '14px',
                 textAlign: 'center',
-                borderRadius: '4px',
-                marginTop: '10px'
+                borderRadius: '6px',
+                marginTop: '10px',
+                border: '2px solid white'
               }}>
-                ✅ Si vous voyez ce message, le code fonctionne
+                ✅ BOUTONS TESTÉS SUR MOBILE ✅<br/>
+                📱 Largeur écran: <span id="screen-width">?</span>px<br/>
+                📏 Viewport: <span id="viewport-width">?</span>px
               </div>
             </div>
           </div>
