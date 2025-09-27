@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useAvailability } from "@/hooks/useAvailability";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,9 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { toast } from "@/hooks/use-toast";
-import { CalendarDays, Users, Home, ArrowLeft } from "lucide-react";
+import { CalendarDays, Users, Home, ArrowLeft, CalendarIcon, Info } from "lucide-react";
 import { z } from "zod";
+import { format, parseISO } from "date-fns";
+import { cn } from "@/lib/utils";
 
 const reservationSchema = z.object({
   checkInDate: z.string().min(1, "Date d'arrivée requise"),
@@ -36,11 +41,12 @@ const accommodationTypes = [
 export default function Reservation() {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { isDateAvailable, validateReservation, loading: availabilityLoading } = useAvailability();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [checkInDate, setCheckInDate] = useState<Date>();
+  const [checkOutDate, setCheckOutDate] = useState<Date>();
   const [formData, setFormData] = useState({
-    checkInDate: "",
-    checkOutDate: "",
     guests: 2,
     accommodationType: "",
     specialRequests: "",
@@ -52,32 +58,49 @@ export default function Reservation() {
     }
   }, [user, authLoading, navigate]);
 
-  const validateForm = () => {
-    try {
-      reservationSchema.parse(formData);
-      setErrors({});
-      return true;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: Record<string, string> = {};
-        error.issues.forEach((err) => {
-          if (err.path[0]) {
-            newErrors[err.path[0].toString()] = err.message;
-          }
-        });
-        setErrors(newErrors);
-      }
-      return false;
+  const validateForm = async () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!checkInDate) {
+      newErrors.checkInDate = "Date d'arrivée requise";
     }
+    
+    if (!checkOutDate) {
+      newErrors.checkOutDate = "Date de départ requise";
+    }
+    
+    if (!formData.accommodationType) {
+      newErrors.accommodationType = "Type d'hébergement requis";
+    }
+    
+    if (formData.guests < 1 || formData.guests > 20) {
+      newErrors.guests = "Nombre d'invités doit être entre 1 et 20";
+    }
+    
+    // Validation des disponibilités
+    if (checkInDate && checkOutDate && formData.accommodationType) {
+      const validation = await validateReservation(
+        checkInDate.toISOString().split('T')[0],
+        checkOutDate.toISOString().split('T')[0],
+        formData.accommodationType
+      );
+      
+      if (!validation.valid) {
+        newErrors.availability = validation.message || "Dates non disponibles";
+      }
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const calculateTotalPrice = () => {
-    if (!formData.checkInDate || !formData.checkOutDate || !formData.accommodationType) {
+    if (!checkInDate || !checkOutDate || !formData.accommodationType) {
       return 0;
     }
 
-    const checkIn = new Date(formData.checkInDate);
-    const checkOut = new Date(formData.checkOutDate);
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
     const nights = Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
     
     const accommodation = accommodationTypes.find(type => type.value === formData.accommodationType);
@@ -89,8 +112,9 @@ export default function Reservation() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
-    if (!user) return;
+    const isValid = await validateForm();
+    if (!isValid) return;
+    if (!user || !checkInDate || !checkOutDate) return;
 
     setLoading(true);
 
@@ -102,8 +126,8 @@ export default function Reservation() {
         .from("reservations")
         .insert({
           user_id: user.id,
-          check_in_date: formData.checkInDate,
-          check_out_date: formData.checkOutDate,
+          check_in_date: checkInDate.toISOString().split('T')[0],
+          check_out_date: checkOutDate.toISOString().split('T')[0],
           guests: formData.guests,
           accommodation_type: formData.accommodationType,
           total_price: totalPrice,
@@ -126,7 +150,7 @@ export default function Reservation() {
 
       // Créer la session de paiement Stripe
       const accommodationLabel = accommodationTypes.find(t => t.value === formData.accommodationType)?.label || formData.accommodationType;
-      const nights = Math.ceil((new Date(formData.checkOutDate).getTime() - new Date(formData.checkInDate).getTime()) / (1000 * 60 * 60 * 24));
+      const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
       const description = `${accommodationLabel} - ${nights} nuit${nights > 1 ? 's' : ''} - ${formData.guests} personne${formData.guests > 1 ? 's' : ''}`;
       
       const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
@@ -161,8 +185,8 @@ export default function Reservation() {
               userEmail: user.email,
               userName: userName,
               reservationId: reservation.id.substring(0, 8).toUpperCase(),
-              checkInDate: formData.checkInDate,
-              checkOutDate: formData.checkOutDate,
+              checkInDate: checkInDate.toISOString().split('T')[0],
+              checkOutDate: checkOutDate.toISOString().split('T')[0],
               guests: formData.guests,
               accommodationType: formData.accommodationType,
               totalPrice: totalPrice,
@@ -208,6 +232,22 @@ export default function Reservation() {
     }
   };
 
+  // Fonction pour désactiver les dates non disponibles
+  const getDisabledDates = (date: Date): boolean => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Désactiver les dates passées
+    if (date < today) return true;
+    
+    // Si un type d'hébergement est sélectionné, vérifier la disponibilité
+    if (formData.accommodationType) {
+      return !isDateAvailable(date, formData.accommodationType);
+    }
+    
+    return false;
+  };
+
   if (authLoading) {
     return <div className="min-h-screen flex items-center justify-center">Chargement...</div>;
   }
@@ -243,30 +283,77 @@ export default function Reservation() {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {errors.availability && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="flex items-center gap-2 text-red-700">
+                      <Info className="w-4 h-4" />
+                      <p className="text-sm font-medium">{errors.availability}</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="checkInDate">Date d'arrivée</Label>
-                    <Input
-                      id="checkInDate"
-                      type="date"
-                      value={formData.checkInDate}
-                      onChange={(e) => handleInputChange("checkInDate", e.target.value)}
-                      min={new Date().toISOString().split('T')[0]}
-                    />
+                    <Label>Date d'arrivée</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !checkInDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {checkInDate ? format(checkInDate, "dd/MM/yyyy") : "Sélectionner une date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={checkInDate}
+                          onSelect={setCheckInDate}
+                          disabled={getDisabledDates}
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
                     {errors.checkInDate && (
                       <p className="text-sm text-destructive mt-1">{errors.checkInDate}</p>
                     )}
                   </div>
 
                   <div>
-                    <Label htmlFor="checkOutDate">Date de départ</Label>
-                    <Input
-                      id="checkOutDate"
-                      type="date"
-                      value={formData.checkOutDate}
-                      onChange={(e) => handleInputChange("checkOutDate", e.target.value)}
-                      min={formData.checkInDate || new Date().toISOString().split('T')[0]}
-                    />
+                    <Label>Date de départ</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !checkOutDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {checkOutDate ? format(checkOutDate, "dd/MM/yyyy") : "Sélectionner une date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={checkOutDate}
+                          onSelect={setCheckOutDate}
+                          disabled={(date) => {
+                            if (getDisabledDates(date)) return true;
+                            if (checkInDate && date <= checkInDate) return true;
+                            return false;
+                          }}
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
                     {errors.checkOutDate && (
                       <p className="text-sm text-destructive mt-1">{errors.checkOutDate}</p>
                     )}
@@ -296,10 +383,15 @@ export default function Reservation() {
                     <Home className="w-4 h-4" />
                     Type d'hébergement
                   </Label>
-                  <Select value={formData.accommodationType} onValueChange={(value) => handleInputChange("accommodationType", value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choisir un hébergement" />
-                    </SelectTrigger>
+                    <Select value={formData.accommodationType} onValueChange={(value) => {
+                      handleInputChange("accommodationType", value);
+                      // Reset dates when accommodation type changes to refresh availability
+                      setCheckInDate(undefined);
+                      setCheckOutDate(undefined);
+                    }}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Choisir un hébergement" />
+                      </SelectTrigger>
                     <SelectContent>
                       {accommodationTypes.map((type) => (
                         <SelectItem key={type.value} value={type.value}>
@@ -324,9 +416,21 @@ export default function Reservation() {
                   />
                 </div>
 
-                <Button type="submit" disabled={loading} className="w-full" size="lg">
+                <Button 
+                  type="submit" 
+                  disabled={loading || availabilityLoading} 
+                  className="w-full" 
+                  size="lg"
+                >
                   {loading ? "Réservation en cours..." : "Confirmer la réservation"}
                 </Button>
+                
+                {formData.accommodationType && (
+                  <div className="text-sm text-muted-foreground bg-blue-50 p-3 rounded-lg">
+                    <Info className="w-4 h-4 inline mr-2" />
+                    Les dates en gris ne sont pas disponibles pour ce type d'hébergement.
+                  </div>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -336,14 +440,14 @@ export default function Reservation() {
               <CardTitle>Résumé de la réservation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {formData.checkInDate && formData.checkOutDate && (
+              {checkInDate && checkOutDate && (
                 <div>
                   <h3 className="font-semibold mb-2">Dates</h3>
                   <p className="text-sm text-muted-foreground">
-                    Du {new Date(formData.checkInDate).toLocaleDateString('fr-FR')} au {new Date(formData.checkOutDate).toLocaleDateString('fr-FR')}
+                    Du {format(checkInDate, "dd/MM/yyyy")} au {format(checkOutDate, "dd/MM/yyyy")}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {Math.ceil((new Date(formData.checkOutDate).getTime() - new Date(formData.checkInDate).getTime()) / (1000 * 60 * 60 * 24))} nuit(s)
+                    {Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24))} nuit(s)
                   </p>
                 </div>
               )}
