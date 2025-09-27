@@ -7,7 +7,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
 import fermeRenouville from "@/assets/ferme-renouville.jpg";
 import phareCapLevi from "@/assets/phare-cap-levi.jpg";
-import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
+import maisonRouge from "@/assets/maison-rouge.jpg";
 import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
 import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
 import goelandLogo from "@/assets/goeland-logo.png";
@@ -49,9 +49,9 @@ const localDiscoveries = [
   },
   {
     title: "La Maison Rouge",
-    description: "Restaurant gastronomique célébrant les saveurs du terroir",
+    description: "Restaurant panoramique vue sur mer à 10 minutes de Cherbourg en Cotentin",
     category: "Gastronomie",
-    image: restaurantGastronomique,
+    image: maisonRouge,
     link: "https://www.restaurant-lamaisonrouge.fr/",
     type: "website",
     location: "Fermanville",
