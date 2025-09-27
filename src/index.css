@@ -128,8 +128,17 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Adjust scroll padding to account for fixed header */
+  html {
+    scroll-padding-top: 80px;
   }
 }
 
