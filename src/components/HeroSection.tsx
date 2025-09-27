@@ -57,9 +57,9 @@ const HeroSection = () => {
             touchAction: 'auto'
           }}
         >
-          {/* BOUTONS VISIBLES PARTOUT - DESKTOP ET MOBILE */}
+          {/* BOUTONS FONCTIONNELS - Design original restauré */}
           <div style={{
-            display: 'block', // Toujours visible
+            display: 'block',
             width: '100%',
             maxWidth: '400px',
             margin: '20px auto 0 auto'
@@ -73,55 +73,57 @@ const HeroSection = () => {
                 style={{
                   width: '100%',
                   height: '60px',
-                  backgroundColor: '#ff0000',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
                   color: 'white',
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontWeight: '600',
                   cursor: 'pointer',
-                  border: '4px solid #ffff00',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                  boxShadow: '0 8px 25px -8px hsl(var(--primary) / 0.4)',
                   WebkitTapHighlightColor: 'transparent',
                   userSelect: 'none',
                   WebkitUserSelect: 'none',
                   position: 'relative',
                   zIndex: 99999,
-                  touchAction: 'manipulation'
+                  touchAction: 'manipulation',
+                  transition: 'all 0.3s ease'
                 }}
-                onTouchStart={() => console.log('TOUCH RED BUTTON')}
+                onTouchStart={() => console.log('TOUCH RÉSERVER')}
                 onTouchEnd={() => window.location.href = '/reservation'}
                 onMouseDown={() => window.location.href = '/reservation'}
                 onClick={() => window.location.href = '/reservation'}
               >
-                🔴 RÉSERVER MAINTENANT 🔴
+                Réserver Maintenant
               </div>
               
               <div 
                 style={{
                   width: '100%',
                   height: '60px',
-                  backgroundColor: '#00ff00',
-                  color: 'black',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontWeight: '600',
                   cursor: 'pointer',
-                  border: '4px solid #0000ff',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                  boxShadow: '0 8px 25px -8px rgba(0, 0, 0, 0.1)',
                   WebkitTapHighlightColor: 'transparent',
                   userSelect: 'none',
                   WebkitUserSelect: 'none',
                   position: 'relative',
                   zIndex: 99999,
-                  touchAction: 'manipulation'
+                  touchAction: 'manipulation',
+                  transition: 'all 0.3s ease'
                 }}
-                onTouchStart={() => console.log('TOUCH GREEN BUTTON')}
+                onTouchStart={() => console.log('TOUCH DÉCOUVRIR')}
                 onTouchEnd={() => {
                   const element = document.getElementById('hebergements');
                   if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -135,23 +137,7 @@ const HeroSection = () => {
                   if (element) element.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                🟢 DÉCOUVRIR LA RÉGION 🟢
-              </div>
-              
-              {/* Message de debug - TOUJOURS visible */}
-              <div style={{
-                color: 'white',
-                background: 'rgba(0,0,0,0.9)',
-                padding: '12px',
-                fontSize: '14px',
-                textAlign: 'center',
-                borderRadius: '6px',
-                marginTop: '10px',
-                border: '2px solid white'
-              }}>
-                ✅ BOUTONS TESTÉS SUR MOBILE ✅<br/>
-                📱 Largeur écran: <span id="screen-width">?</span>px<br/>
-                📏 Viewport: <span id="viewport-width">?</span>px
+                Découvrir
               </div>
             </div>
           </div>
