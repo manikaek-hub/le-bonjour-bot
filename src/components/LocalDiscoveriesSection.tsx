@@ -5,7 +5,7 @@ import { ExternalLink, MapPin, Clock, Star } from "lucide-react";
 import OptimizedImage from "@/components/OptimizedImage";
 
 import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
-import fermeLocale from "@/assets/ferme-locale.jpg";
+import fermeRenouville from "@/assets/ferme-renouville.jpg";
 import phareCote from "@/assets/phare-cote.jpg";
 import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
 import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
@@ -27,7 +27,7 @@ const localDiscoveries = [
     title: "Ferme de Renouville",
     description: "Producteurs locaux, circuits courts et authenticité normande",
     category: "Producteur Local",
-    image: fermeLocale,
+    image: fermeRenouville,
     link: "https://fermederenouville.com/",
     type: "website",
     location: "Renouville",
