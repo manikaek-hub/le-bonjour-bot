@@ -1,10 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut, User } from "lucide-react";
+import { LogOut, User, Shield, Menu } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
 
   return (
@@ -39,27 +48,37 @@ const Header = () => {
               <>
                 {user ? (
                   <div className="flex items-center space-x-2">
-                    <Button
-                      onClick={() => navigate("/mes-reservations")}
-                      variant="ghost"
-                      size="sm"
-                      className="text-muted-foreground hover:text-primary"
-                    >
-                      Mes réservations
-                    </Button>
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                      <User className="w-4 h-4" />
-                      <span className="hidden md:inline">{user.email}</span>
-                    </div>
-                    <Button
-                      variant="coastal"
-                      size="sm"
-                      onClick={signOut}
-                      className="flex items-center space-x-1"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      <span className="hidden md:inline">Déconnexion</span>
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                          <User className="w-4 h-4" />
+                          <span className="hidden md:inline">{user.email}</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-56">
+                        <div className="px-2 py-1.5 text-sm">
+                          <div className="font-medium">{user.email}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {isAdmin ? "Administrateur" : "Utilisateur"}
+                          </div>
+                        </div>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => navigate("/mes-reservations")}>
+                          Mes réservations
+                        </DropdownMenuItem>
+                        {isAdmin && (
+                          <DropdownMenuItem onClick={() => navigate("/admin")}>
+                            <Shield className="mr-2 h-4 w-4" />
+                            Administration
+                          </DropdownMenuItem>
+                        )}
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={signOut}>
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Déconnexion
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 ) : (
                   <Link to="/auth">
