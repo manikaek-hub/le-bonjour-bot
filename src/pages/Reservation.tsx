@@ -29,6 +29,14 @@ const reservationSchema = z.object({
 }).refine((data) => new Date(data.checkOutDate) > new Date(data.checkInDate), {
   message: "La date de départ doit être après la date d'arrivée",
   path: ["checkOutDate"],
+}).refine((data) => {
+  const checkIn = new Date(data.checkInDate);
+  const checkOut = new Date(data.checkOutDate);
+  const nights = Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
+  return nights >= 2;
+}, {
+  message: "Séjour minimum de 2 nuits requis",
+  path: ["checkOutDate"],
 });
 
 // Système de tarification saisonnière
@@ -94,6 +102,14 @@ export default function Reservation() {
       newErrors.checkOutDate = "Date de départ requise";
     }
     
+    // Validation minimum 2 nuits
+    if (checkInDate && checkOutDate) {
+      const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      if (nights < 2) {
+        newErrors.checkOutDate = "Séjour minimum de 2 nuits requis";
+      }
+    }
+    
     if (!formData.accommodationType) {
       newErrors.accommodationType = "Type d'hébergement requis";
     }
@@ -107,7 +123,7 @@ export default function Reservation() {
     }
     
     // Validation des disponibilités
-    if (checkInDate && checkOutDate && formData.accommodationType) {
+    if (checkInDate && checkOutDate && formData.accommodationType && !newErrors.checkOutDate) {
       const validation = await validateReservation(
         checkInDate.toISOString().split('T')[0],
         checkOutDate.toISOString().split('T')[0],
@@ -314,7 +330,7 @@ export default function Reservation() {
                 Nouvelle Réservation
               </CardTitle>
               <CardDescription>
-                Réservez votre séjour au FortJoret Resort
+                Réservez votre séjour au FortJoret Resort • Séjour minimum 2 nuits
               </CardDescription>
             </CardHeader>
             <CardContent>
