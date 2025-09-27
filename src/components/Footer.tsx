@@ -25,23 +25,23 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="font-semibold mb-4">Navigation</h4>
-            <ul className="space-y-2 text-primary-foreground/80">
-              <li><a href="/#accueil" className="hover:text-primary-foreground transition-colors">Accueil</a></li>
-              <li><a href="/#hebergements" className="hover:text-primary-foreground transition-colors">Hébergements</a></li>
-              <li><a href="/#region" className="hover:text-primary-foreground transition-colors">La Région</a></li>
-              <li><a href="/#contact" className="hover:text-primary-foreground transition-colors">Contact</a></li>
-            </ul>
+             <ul className="space-y-2 text-primary-foreground/80">
+               <li><a href="/#accueil" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Accueil</a></li>
+               <li><a href="/#hebergements" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Hébergements</a></li>
+               <li><a href="/#region" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>La Région</a></li>
+               <li><a href="/#contact" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Contact</a></li>
+             </ul>
           </div>
           
           {/* Legal */}
           <div>
             <h4 className="font-semibold mb-4">Informations</h4>
-            <ul className="space-y-2 text-primary-foreground/80">
-              <li><a href="/conditions-generales" className="hover:text-primary-foreground transition-colors">Conditions Générales</a></li>
-              <li><a href="/politique-confidentialite" className="hover:text-primary-foreground transition-colors">Politique de Confidentialité</a></li>
-              <li><a href="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions Légales</a></li>
-              <li><a href="/annulation" className="hover:text-primary-foreground transition-colors">Annulation</a></li>
-            </ul>
+             <ul className="space-y-2 text-primary-foreground/80">
+               <li><a href="/conditions-generales" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Conditions Générales</a></li>
+               <li><a href="/politique-confidentialite" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Politique de Confidentialité</a></li>
+               <li><a href="/mentions-legales" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Mentions Légales</a></li>
+               <li><a href="/annulation" className="hover:text-primary-foreground transition-colors" style={{ touchAction: 'manipulation' }}>Annulation</a></li>
+             </ul>
           </div>
         </div>
         

@@ -32,20 +32,20 @@ const Header = () => {
             <h1 className="text-xl font-bold text-foreground">FortJoret Resort</h1>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navigation principale">
-            <a href="/#accueil" className="text-muted-foreground hover:text-primary transition-colors">
-              Accueil
-            </a>
-            <a href="/#hebergements" className="text-muted-foreground hover:text-primary transition-colors">
-              Hébergements
-            </a>
-            <a href="/#region" className="text-muted-foreground hover:text-primary transition-colors">
-              La Région
-            </a>
-            <a href="/#contact" className="text-muted-foreground hover:text-primary transition-colors">
-              Contact
-            </a>
-          </nav>
+           <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navigation principale">
+             <a href="/#accueil" className="text-muted-foreground hover:text-primary transition-colors" style={{ touchAction: 'manipulation' }}>
+               Accueil
+             </a>
+             <a href="/#hebergements" className="text-muted-foreground hover:text-primary transition-colors" style={{ touchAction: 'manipulation' }}>
+               Hébergements
+             </a>
+             <a href="/#region" className="text-muted-foreground hover:text-primary transition-colors" style={{ touchAction: 'manipulation' }}>
+               La Région
+             </a>
+             <a href="/#contact" className="text-muted-foreground hover:text-primary transition-colors" style={{ touchAction: 'manipulation' }}>
+               Contact
+             </a>
+           </nav>
 
           {/* Mobile Navigation */}
           <div className="md:hidden">
@@ -57,34 +57,38 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Navigation mobile">
-                  <a 
-                    href="/#accueil" 
-                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Accueil
-                  </a>
-                  <a 
-                    href="/#hebergements" 
-                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Hébergements
-                  </a>
-                  <a 
-                    href="/#region" 
-                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    La Région
-                  </a>
-                  <a 
-                    href="/#contact" 
-                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Contact
-                  </a>
+                   <a 
+                     href="/#accueil" 
+                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2 block w-full"
+                     onClick={() => setIsOpen(false)}
+                     style={{ touchAction: 'manipulation' }}
+                   >
+                     Accueil
+                   </a>
+                   <a 
+                     href="/#hebergements" 
+                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2 block w-full"
+                     onClick={() => setIsOpen(false)}
+                     style={{ touchAction: 'manipulation' }}
+                   >
+                     Hébergements
+                   </a>
+                   <a 
+                     href="/#region" 
+                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2 block w-full"
+                     onClick={() => setIsOpen(false)}
+                     style={{ touchAction: 'manipulation' }}
+                   >
+                     La Région
+                   </a>
+                   <a 
+                     href="/#contact" 
+                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2 block w-full"
+                     onClick={() => setIsOpen(false)}
+                     style={{ touchAction: 'manipulation' }}
+                   >
+                     Contact
+                   </a>
                 </nav>
               </SheetContent>
             </Sheet>
@@ -110,15 +114,19 @@ const Header = () => {
                           </div>
                         </div>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => navigate("/mes-reservations")}>
-                          Mes réservations
-                        </DropdownMenuItem>
-                        {isAdmin && (
-                          <DropdownMenuItem onClick={() => navigate("/admin")}>
-                            <Shield className="mr-2 h-4 w-4" />
-                            Administration
-                          </DropdownMenuItem>
-                        )}
+                         <DropdownMenuItem asChild>
+                           <a href="/mes-reservations" className="flex items-center w-full">
+                             Mes réservations
+                           </a>
+                         </DropdownMenuItem>
+                         {isAdmin && (
+                           <DropdownMenuItem asChild>
+                             <a href="/admin" className="flex items-center w-full">
+                               <Shield className="mr-2 h-4 w-4" />
+                               Administration
+                             </a>
+                           </DropdownMenuItem>
+                         )}
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={signOut}>
                           <LogOut className="mr-2 h-4 w-4" />
@@ -127,20 +135,18 @@ const Header = () => {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
-                ) : (
-                  <Link to="/auth">
-                    <Button variant="coastal" size="lg">
-                      Connexion
-                    </Button>
-                  </Link>
-                )}
-                <Button 
-                  variant="ocean" 
-                  size="lg"
-                  onClick={() => navigate("/reservation")}
-                >
-                  Réserver
-                </Button>
+                 ) : (
+                   <a href="/auth" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft hover:bg-background hover:shadow-elegant no-underline" style={{ touchAction: 'manipulation' }}>
+                     Connexion
+                   </a>
+                 )}
+                 <a 
+                   href="/reservation"
+                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant hover:shadow-lg hover:scale-[1.02] no-underline"
+                   style={{ touchAction: 'manipulation' }}
+                 >
+                   Réserver
+                 </a>
               </>
             )}
           </div>
