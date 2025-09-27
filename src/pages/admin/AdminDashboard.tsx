@@ -18,8 +18,11 @@ import {
   XCircle,
   Euro,
   RefreshCw,
-  Activity
+  Activity,
+  Download,
+  AlertCircle
 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface DashboardStats {
   totalUsers: number;
@@ -37,7 +40,9 @@ interface DashboardStats {
 export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [scrapeLoading, setScrapeLoading] = useState(false);
   const { handleError } = useErrorHandler();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchDashboardStats();
@@ -143,6 +148,50 @@ export default function AdminDashboard() {
   const getGrowthPercentage = (current: number, previous: number) => {
     if (previous === 0) return current > 0 ? 100 : 0;
     return Math.round(((current - previous) / previous) * 100);
+  };
+
+  const testEventsScraper = async () => {
+    try {
+      setScrapeLoading(true);
+      
+      const { data, error } = await supabase.functions.invoke('scrape-events', {
+        body: { manual_trigger: true }
+      });
+
+      if (error) {
+        console.error('Erreur lors du scraping:', error);
+        toast({
+          title: "Erreur",
+          description: "Impossible de lancer le scraping des événements",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      console.log('Résultat du scraping:', data);
+      
+      if (data?.success) {
+        toast({
+          title: "Succès",
+          description: `${data.events_count || 0} événements récupérés`,
+        });
+      } else {
+        toast({
+          title: "Attention",
+          description: data?.error || "Aucun événement trouvé",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Erreur lors du test du scraper:', error);
+      toast({
+        title: "Erreur",
+        description: "Erreur lors du test de l'agent de scraping",
+        variant: "destructive",
+      });
+    } finally {
+      setScrapeLoading(false);
+    }
   };
 
   if (loading) {
@@ -361,7 +410,7 @@ export default function AdminDashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Button variant="outline" className="justify-start h-auto p-4">
                 <Calendar className="w-5 h-5 mr-3" />
                 <div className="text-left">
@@ -388,6 +437,25 @@ export default function AdminDashboard() {
                   <div className="font-medium">Voir les paiements</div>
                   <div className="text-sm text-muted-foreground">
                     {formatCurrency(stats.monthlyRevenue)} ce mois
+                  </div>
+                </div>
+              </Button>
+
+              <Button 
+                variant="outline" 
+                className="justify-start h-auto p-4"
+                onClick={testEventsScraper}
+                disabled={scrapeLoading}
+              >
+                {scrapeLoading ? (
+                  <RefreshCw className="w-5 h-5 mr-3 animate-spin" />
+                ) : (
+                  <Download className="w-5 h-5 mr-3" />
+                )}
+                <div className="text-left">
+                  <div className="font-medium">Tester l'agent événements</div>
+                  <div className="text-sm text-muted-foreground">
+                    {scrapeLoading ? "En cours..." : "Scraper manuel"}
                   </div>
                 </div>
               </Button>
