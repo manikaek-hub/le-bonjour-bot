@@ -264,10 +264,11 @@ const AccommodationSection = () => {
           <div className="space-y-6 md:order-1">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Maison Familiale 40m² - 2 adultes + 3 enfants
+                Petite Maison les pieds dans l'eau
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Maison cosy de 40m² parfaitement adaptée aux familles avec enfants. 
+                La plage est au bout du jardin, idéal pour les jeux de sable pour les enfants.
                 Offre tout le confort nécessaire dans un espace optimisé et chaleureux 
                 avec vue sur la mer.
               </p>
