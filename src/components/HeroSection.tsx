@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section 
       id="accueil" 
@@ -37,6 +40,7 @@ const HeroSection = () => {
             size="xl" 
             className="min-w-[200px] animate-pulse-glow"
             aria-label="Réserver votre séjour au FortJoret Resort maintenant"
+            onClick={() => navigate("/reservation")}
           >
             Réserver Maintenant
           </Button>
