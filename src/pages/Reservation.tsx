@@ -97,7 +97,7 @@ export default function Reservation() {
     try {
       const totalPrice = calculateTotalPrice();
 
-      // Créer la réservation
+      // Créer la réservation avec statut pending
       const { data: reservation, error } = await supabase
         .from("reservations")
         .insert({
@@ -108,6 +108,7 @@ export default function Reservation() {
           accommodation_type: formData.accommodationType,
           total_price: totalPrice,
           special_requests: formData.specialRequests || null,
+          status: 'pending'
         })
         .select()
         .single();
@@ -121,49 +122,78 @@ export default function Reservation() {
         return;
       }
 
-      // Récupérer les informations du profil utilisateur
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("first_name, last_name")
-        .eq("user_id", user.id)
-        .single();
+      console.log('Reservation created:', reservation);
 
-      const userName = profile && (profile.first_name || profile.last_name) 
-        ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim()
-        : user.email?.split('@')[0] || 'Client';
-
-      // Envoyer l'email de confirmation
-      try {
-        await supabase.functions.invoke('send-reservation-email', {
-          body: {
-            userEmail: user.email,
-            userName: userName,
-            reservationId: reservation.id.substring(0, 8).toUpperCase(),
-            checkInDate: formData.checkInDate,
-            checkOutDate: formData.checkOutDate,
-            guests: formData.guests,
-            accommodationType: formData.accommodationType,
-            totalPrice: totalPrice,
-            specialRequests: formData.specialRequests || undefined,
-          },
-        });
-        
-        console.log("Email de confirmation envoyé");
-      } catch (emailError) {
-        console.error("Erreur lors de l'envoi de l'email:", emailError);
-        // Ne pas faire échouer la réservation si l'email échoue
-      }
-
-      toast({
-        title: "Réservation créée !",
-        description: `Votre réservation de ${totalPrice}€ a été créée avec succès. Un email de confirmation vous a été envoyé.`,
+      // Créer la session de paiement Stripe
+      const accommodationLabel = accommodationTypes.find(t => t.value === formData.accommodationType)?.label || formData.accommodationType;
+      const nights = Math.ceil((new Date(formData.checkOutDate).getTime() - new Date(formData.checkInDate).getTime()) / (1000 * 60 * 60 * 24));
+      const description = `${accommodationLabel} - ${nights} nuit${nights > 1 ? 's' : ''} - ${formData.guests} personne${formData.guests > 1 ? 's' : ''}`;
+      
+      const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
+        body: {
+          totalPrice: totalPrice,
+          reservationId: reservation.id,
+          description: description
+        }
       });
 
-      navigate("/");
+      if (paymentError) {
+        throw new Error(paymentError.message);
+      }
+
+      // Rediriger vers Stripe Checkout
+      if (paymentData?.url) {
+        // Récupérer les informations du profil utilisateur pour l'email
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("first_name, last_name")
+          .eq("user_id", user.id)
+          .single();
+
+        const userName = profile && (profile.first_name || profile.last_name) 
+          ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim()
+          : user.email?.split('@')[0] || 'Client';
+
+        // Envoyer l'email de confirmation après la redirection
+        try {
+          await supabase.functions.invoke('send-reservation-email', {
+            body: {
+              userEmail: user.email,
+              userName: userName,
+              reservationId: reservation.id.substring(0, 8).toUpperCase(),
+              checkInDate: formData.checkInDate,
+              checkOutDate: formData.checkOutDate,
+              guests: formData.guests,
+              accommodationType: formData.accommodationType,
+              totalPrice: totalPrice,
+              specialRequests: formData.specialRequests || undefined,
+            },
+          });
+          
+          console.log("Email de confirmation envoyé");
+        } catch (emailError) {
+          console.error("Erreur lors de l'envoi de l'email:", emailError);
+          // Ne pas faire échouer la réservation si l'email échoue
+        }
+
+        toast({
+          title: "Redirection vers le paiement",
+          description: "Vous allez être redirigé vers la page de paiement sécurisée.",
+        });
+
+        // Ouvrir Stripe Checkout dans un nouvel onglet
+        window.open(paymentData.url, '_blank');
+        
+        // Rediriger vers la page des réservations
+        navigate('/mes-reservations');
+      } else {
+        throw new Error('Impossible de créer la session de paiement');
+      }
     } catch (error) {
+      console.error('Error creating reservation:', error);
       toast({
         title: "Erreur",
-        description: "Une erreur inattendue s'est produite.",
+        description: error instanceof Error ? error.message : "Une erreur inattendue s'est produite.",
         variant: "destructive",
       });
     } finally {
