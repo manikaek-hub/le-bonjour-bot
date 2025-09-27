@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      events: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          dates: string | null
+          description: string | null
+          event_end_date: string | null
+          event_start_date: string | null
+          external_link: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          location: string | null
+          price: string | null
+          scraped_at: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          dates?: string | null
+          description?: string | null
+          event_end_date?: string | null
+          event_start_date?: string | null
+          external_link?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          price?: string | null
+          scraped_at?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          dates?: string | null
+          description?: string | null
+          event_end_date?: string | null
+          event_start_date?: string | null
+          external_link?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          price?: string | null
+          scraped_at?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
