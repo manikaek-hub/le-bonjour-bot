@@ -38,21 +38,23 @@ const HeroSection = () => {
           <Button 
             variant="ocean" 
             size="xl" 
-            className="min-w-[200px] animate-pulse-glow"
+            className="min-w-[200px] animate-pulse-glow touch-manipulation cursor-pointer"
             aria-label="Réserver votre séjour au FortJoret Resort maintenant"
             onClick={() => navigate("/reservation")}
+            onTouchStart={() => {}} // Enable touch events for mobile
           >
             Réserver Maintenant
           </Button>
           <Button 
             variant="coastal" 
             size="xl" 
-            className="min-w-[200px]"
+            className="min-w-[200px] touch-manipulation cursor-pointer"
             aria-label="Découvrir le FortJoret Resort et ses services"
             onClick={() => {
               const element = document.getElementById('hebergements');
               element?.scrollIntoView({ behavior: 'smooth' });
             }}
+            onTouchStart={() => {}} // Enable touch events for mobile
           >
             Découvrir
           </Button>
