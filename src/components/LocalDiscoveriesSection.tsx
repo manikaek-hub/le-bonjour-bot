@@ -91,16 +91,15 @@ export default function LocalDiscoveriesSection() {
         <div className="mb-16 animate-fade-in-up">
           <div className="relative rounded-2xl overflow-hidden shadow-large">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&modestbranding=1"
+              src="https://player.vimeo.com/video/853395554?badge=0&autopause=0&player_id=0&app_id=58479"
               title="La beauté du Cotentin"
               className="w-full aspect-video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
-            <div className="absolute bottom-6 left-6 text-white">
+            <div className="absolute bottom-6 left-6 text-white pointer-events-none">
               <h3 className="text-2xl font-semibold mb-2">La Pointe du Cotentin</h3>
-              <p className="text-white/80">Découvrez la beauté sauvage de notre région</p>
+              <p className="text-white/90">Découvrez la beauté sauvage de notre région</p>
             </div>
           </div>
         </div>
