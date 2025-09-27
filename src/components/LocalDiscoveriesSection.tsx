@@ -10,16 +10,18 @@ import phareCote from "@/assets/phare-cote.jpg";
 import restaurantGastronomique from "@/assets/restaurant-gastronomique.jpg";
 import chocolatierArtisan from "@/assets/chocolatier-artisan.jpg";
 import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
+import goelandLogo from "@/assets/goeland-logo.png";
 
 const localDiscoveries = [
   {
-    title: "Le Goéland 1937",
-    description: "Restaurant face à la mer avec vue panoramique sur la Manche",
+    title: "GOÉLAND 1937",
+    description: "Bistro Mer Resto ☀️🍹🏄‍♂️ - Ambiance décontractée face à la mer",
     category: "Restaurant",
     image: goelandVueMer,
-    link: "https://www.instagram.com/legoeland1937_/?hl=fr",
-    type: "instagram",
-    location: "Fermanville",
+    logo: goelandLogo,
+    link: "#", // Pas de redirection directe
+    type: "local",
+    location: "12 rue du Vieux Château, 50110 Bretteville",
     rating: 4.8,
     openingHours: "12h-22h"
   },
@@ -70,8 +72,10 @@ const localDiscoveries = [
 ];
 
 export default function LocalDiscoveriesSection() {
-  const handleDiscoveryClick = (link: string) => {
-    window.open(link, '_blank', 'noopener,noreferrer');
+  const handleDiscoveryClick = (link: string, type: string) => {
+    if (type !== 'local') {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
@@ -112,7 +116,7 @@ export default function LocalDiscoveriesSection() {
               key={discovery.title}
               className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => handleDiscoveryClick(discovery.link)}
+              onClick={() => handleDiscoveryClick(discovery.link, discovery.type)}
             >
               <div className="relative overflow-hidden">
                 <OptimizedImage
@@ -120,15 +124,24 @@ export default function LocalDiscoveriesSection() {
                   alt={discovery.title}
                   className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute top-4 left-4">
-                  <Badge variant="secondary" className="bg-white/90 text-foreground">
+                {discovery.logo && (
+                  <div className="absolute top-4 left-4">
+                    <div className="w-12 h-12 bg-white/95 rounded-full flex items-center justify-center shadow-medium">
+                      <OptimizedImage
+                        src={discovery.logo}
+                        alt={`${discovery.title} logo`}
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="absolute top-4 right-4">
+                  <Badge 
+                    variant="secondary" 
+                    className="bg-white/90 text-foreground"
+                  >
                     {discovery.category}
                   </Badge>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
-                    <ExternalLink className="w-4 h-4 text-foreground" />
-                  </div>
                 </div>
               </div>
               
