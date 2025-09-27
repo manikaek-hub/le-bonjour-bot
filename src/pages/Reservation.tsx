@@ -427,8 +427,18 @@ export default function Reservation() {
                     type="number"
                     min="1"
                     max="5"
-                    value={formData.guests}
-                    onChange={(e) => handleInputChange("guests", parseInt(e.target.value) || 1)}
+                    value={formData.guests.toString()}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === "") {
+                        handleInputChange("guests", 1);
+                      } else {
+                        const numValue = parseInt(value);
+                        if (!isNaN(numValue) && numValue >= 1 && numValue <= 5) {
+                          handleInputChange("guests", numValue);
+                        }
+                      }
+                    }}
                   />
                   {formData.accommodationType && (
                     <p className="text-xs text-muted-foreground mt-1">
