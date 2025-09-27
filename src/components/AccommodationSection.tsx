@@ -269,14 +269,13 @@ const AccommodationSection = () => {
                 Petite Maison les pieds dans l'eau
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Maison cosy de 55m² parfaitement adaptée aux familles avec enfants. 
-                La plage est au bout du jardin, idéal pour les jeux de sable pour les enfants.
-                Offre tout le confort nécessaire dans un espace optimisé et chaleureux 
-                avec vue sur la mer.
+                Charmante maison de 55m² spécialement conçue pour les familles avec jeunes enfants. 
+                Située les pieds dans l'eau avec un accès direct à la plage depuis le jardin, 
+                elle offre un cadre privilégié pour des vacances sereines en bord de mer.
               </p>
               <p className="text-muted-foreground/80 mb-6 text-sm leading-relaxed">
-                Configuration idéale pour les parents avec jeunes enfants, à proximité 
-                immédiate de la plage et des sentiers côtiers.
+                Espace optimisé et chaleureux avec vue panoramique sur l'océan, 
+                à deux pas des sentiers côtiers pour vos balades matinales.
               </p>
             </div>
             
