@@ -33,16 +33,16 @@ const Header = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navigation principale">
-            <a href="#accueil" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#accueil" className="text-muted-foreground hover:text-primary transition-colors">
               Accueil
             </a>
-            <a href="#hebergements" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#hebergements" className="text-muted-foreground hover:text-primary transition-colors">
               Hébergements
             </a>
-            <a href="#region" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#region" className="text-muted-foreground hover:text-primary transition-colors">
               La Région
             </a>
-            <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#contact" className="text-muted-foreground hover:text-primary transition-colors">
               Contact
             </a>
           </nav>
@@ -58,28 +58,28 @@ const Header = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Navigation mobile">
                   <a 
-                    href="#accueil" 
+                    href="/#accueil" 
                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
                     Accueil
                   </a>
                   <a 
-                    href="#hebergements" 
+                    href="/#hebergements" 
                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
                     Hébergements
                   </a>
                   <a 
-                    href="#region" 
+                    href="/#region" 
                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
                     La Région
                   </a>
                   <a 
-                    href="#contact" 
+                    href="/#contact" 
                     className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
