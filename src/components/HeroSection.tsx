@@ -47,127 +47,22 @@ const HeroSection = () => {
           Un refuge de luxe face à la mer, où tradition et modernité se rencontrent.
         </p>
         
-        {/* Boutons avec une nouvelle approche pour mobile */}
-        <div 
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          style={{ 
-            position: 'relative',
-            zIndex: 9999,
-            pointerEvents: 'auto',
-            touchAction: 'auto'
-          }}
-        >
-          {/* BOUTONS MOBILES UNIQUEMENT */}
-          <div className="md:hidden" style={{
-            display: 'block',
-            width: '100%',
-            maxWidth: '400px',
-            margin: '20px auto 0 auto'
-          }}>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '16px'
-            }}>
-              <div 
-                style={{
-                  width: '100%',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
-                  color: 'white',
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  boxShadow: '0 8px 25px -8px hsl(var(--primary) / 0.4)',
-                  WebkitTapHighlightColor: 'transparent',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  position: 'relative',
-                  zIndex: 99999,
-                  touchAction: 'manipulation',
-                  transition: 'all 0.3s ease'
-                }}
-                onTouchEnd={(e) => {
-                  e.preventDefault();
-                  setTimeout(() => {
-                    window.location.href = '/reservation';
-                  }, 100);
-                }}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/reservation';
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/reservation';
-                }}
-              >
-                📅 Réserver Maintenant
-              </div>
-              
-              <div 
-                style={{
-                  width: '100%',
-                  height: '60px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  color: 'white',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  boxShadow: '0 8px 25px -8px rgba(0, 0, 0, 0.1)',
-                  WebkitTapHighlightColor: 'transparent',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  position: 'relative',
-                  zIndex: 99999,
-                  touchAction: 'manipulation',
-                  transition: 'all 0.3s ease'
-                }}
-                onTouchEnd={() => {
-                  const element = document.getElementById('hebergements');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
-                onMouseDown={() => {
-                  const element = document.getElementById('hebergements');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
-                onClick={() => {
-                  const element = document.getElementById('hebergements');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Découvrir
-              </div>
-            </div>
+        {/* Boutons responsive */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant cursor-pointer select-none animate-pulse-glow"
+            onClick={() => window.location.href = "/reservation"}
+          >
+            Réserver Maintenant
           </div>
-
-          {/* Version desktop - boutons originaux */}
-          <div className="hidden md:flex flex-row gap-4">
-            <div 
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-gradient-to-r from-primary to-primary-glow text-primary-foreground shadow-elegant cursor-pointer select-none animate-pulse-glow"
-              onClick={() => window.location.href = "/reservation"}
-            >
-              Réserver Maintenant
-            </div>
-            <div 
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft cursor-pointer select-none"
-              onClick={() => {
-                const element = document.getElementById('hebergements');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Découvrir
-            </div>
+          <div 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-base font-medium h-12 px-10 min-w-[200px] bg-background/80 backdrop-blur-sm text-foreground border border-border/50 shadow-soft cursor-pointer select-none"
+            onClick={() => {
+              const element = document.getElementById('hebergements');
+              if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Découvrir
           </div>
         </div>
       </div>
