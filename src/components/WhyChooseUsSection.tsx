@@ -20,8 +20,8 @@ const WhyChooseUsSection = () => {
     },
     {
       icon: <Car className="w-8 h-8 text-primary" />,
-      title: "Parking inclus",
-      description: "Stationnement privé gratuit pour votre véhicule"
+      title: "Parking gratuit",
+      description: "Places de stationnement gratuites disponibles à proximité"
     },
     {
       icon: <Wifi className="w-8 h-8 text-primary" />,

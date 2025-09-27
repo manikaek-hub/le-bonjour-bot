@@ -13,7 +13,7 @@ const FAQSection = () => {
     },
     {
       question: "Y a-t-il un parking disponible ?",
-      answer: "Oui, un parking privé gratuit est inclus pour votre véhicule. Vous pourrez vous garer en toute sécurité devant le logement."
+      answer: "Oui, des places de stationnement gratuit sont disponibles à proximité du logement. Vous pourrez vous garer facilement et gratuitement."
     },
     {
       question: "La plage est-elle vraiment accessible à pied ?",
