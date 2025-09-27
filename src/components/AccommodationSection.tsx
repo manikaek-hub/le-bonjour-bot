@@ -31,6 +31,8 @@ const AccommodationSection = () => {
 
   // Images pour la maison 40m² (2 adultes + 3 enfants)
   // Maison 2 - Charme des tomettes anciennes, du parquet en bois, zelliges marocains de la salle de bain
+  // Les pieds dans le sable, coucher de soleil face à la maison baignée de soleil grâce à des grandes baies vitrées
+  // Terrain de pétanque et un grand terrain de 1500m²
   const images2 = [
     { src: bedroomLoft, alt: "Chambre sous les combles" },
     { src: entranceTiles, alt: "Entrée avec tomettes hexagonales" }
