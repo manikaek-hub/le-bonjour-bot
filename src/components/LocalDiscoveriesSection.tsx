@@ -175,7 +175,7 @@ export default function LocalDiscoveriesSection() {
                   variant="outline" 
                   className="w-full mt-4 group-hover:bg-primary group-hover:text-white transition-all duration-300"
                 >
-                  {discovery.type === 'instagram' ? 'RDV sur Facebook ou Instagram' : discovery.type === 'local' ? 'Plus d\'infos bientôt' : 'RDV sur Facebook ou Instagram'}
+                  {discovery.type === 'instagram' ? 'Visiter le site' : discovery.type === 'local' ? 'Plus d\'infos bientôt' : 'Visiter le site'}
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
               </CardContent>
