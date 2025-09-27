@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 const reservationSchema = z.object({
   checkInDate: z.string().min(1, "Date d'arrivée requise"),
   checkOutDate: z.string().min(1, "Date de départ requise"),
-  guests: z.number().min(1, "Nombre d'invités requis").max(6, "Maximum 6 personnes (4 adultes + 2 enfants)"),
+  guests: z.number().min(1, "Nombre d'invités requis").max(5, "Maximum 5 personnes"),
   accommodationType: z.string().min(1, "Type d'hébergement requis"),
   specialRequests: z.string().optional(),
 }).refine((data) => new Date(data.checkInDate) >= new Date(new Date().setHours(0, 0, 0, 0)), {
@@ -31,9 +31,36 @@ const reservationSchema = z.object({
   path: ["checkOutDate"],
 });
 
+// Système de tarification saisonnière
+const getSeasonalPrice = (date: Date): number => {
+  const month = date.getMonth() + 1; // JavaScript months are 0-indexed
+  const day = date.getDate();
+  
+  // Haute saison: Juillet-Août + vacances de Noël
+  if ((month === 7 || month === 8) || (month === 12 && day >= 20) || (month === 1 && day <= 6)) {
+    return 230;
+  }
+  
+  // Basse saison: Novembre-Mars (hors vacances de Noël)
+  if ((month >= 11 || month <= 3) && !(month === 12 && day >= 20) && !(month === 1 && day <= 6)) {
+    return 160;
+  }
+  
+  // Moyenne saison: le reste
+  return 200;
+};
+
+const getSeasonName = (price: number): string => {
+  switch (price) {
+    case 230: return "haute saison";
+    case 160: return "basse saison";
+    default: return "moyenne saison";
+  }
+};
+
 const accommodationTypes = [
-  { value: "maison_70m2", label: "Maison 70m² (5 personnes)", price: 120 },
-  { value: "maison_40m2", label: "Maison 40m² (4 adultes + 2 enfants)", price: 80 },
+  { value: "maison_70m2", label: "Maison 70m² (5 personnes)", basePrice: 200 },
+  { value: "maison_40m2", label: "Maison 40m² (2 adultes + 3 enfants)", basePrice: 200 },
 ];
 
 export default function Reservation() {
@@ -75,8 +102,8 @@ export default function Reservation() {
       newErrors.guests = "Nombre d'invités requis";
     } else if (formData.accommodationType === "maison_70m2" && formData.guests > 5) {
       newErrors.guests = "Maximum 5 personnes pour la maison 70m²";
-    } else if (formData.accommodationType === "maison_40m2" && formData.guests > 6) {
-      newErrors.guests = "Maximum 6 personnes (4 adultes + 2 enfants) pour la maison 40m²";
+    } else if (formData.accommodationType === "maison_40m2" && formData.guests > 5) {
+      newErrors.guests = "Maximum 5 personnes (2 adultes + 3 enfants) pour la maison 40m²";
     }
     
     // Validation des disponibilités
@@ -105,10 +132,17 @@ export default function Reservation() {
     const checkOut = new Date(checkOutDate);
     const nights = Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
     
-    const accommodation = accommodationTypes.find(type => type.value === formData.accommodationType);
-    const basePrice = accommodation?.price || 0;
+    let totalPrice = 0;
+    const current = new Date(checkIn);
     
-    return nights * basePrice;
+    // Calculer le prix pour chaque nuit selon la saison
+    for (let i = 0; i < nights; i++) {
+      const nightPrice = getSeasonalPrice(current);
+      totalPrice += nightPrice;
+      current.setDate(current.getDate() + 1);
+    }
+    
+    return totalPrice;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -371,13 +405,13 @@ export default function Reservation() {
                     id="guests"
                     type="number"
                     min="1"
-                    max={formData.accommodationType === "maison_70m2" ? "5" : formData.accommodationType === "maison_40m2" ? "6" : "6"}
+                    max="5"
                     value={formData.guests}
                     onChange={(e) => handleInputChange("guests", parseInt(e.target.value) || 1)}
                   />
                   {formData.accommodationType && (
                     <p className="text-xs text-muted-foreground mt-1">
-                      {formData.accommodationType === "maison_70m2" ? "Maximum 5 personnes" : "Maximum 6 personnes (4 adultes + 2 enfants)"}
+                      {formData.accommodationType === "maison_70m2" ? "Maximum 5 personnes" : "Maximum 5 personnes (2 adultes + 3 enfants)"}
                     </p>
                   )}
                   {errors.guests && (
@@ -399,13 +433,18 @@ export default function Reservation() {
                       <SelectTrigger>
                         <SelectValue placeholder="Choisir un hébergement" />
                       </SelectTrigger>
-                    <SelectContent>
-                      {accommodationTypes.map((type) => (
-                        <SelectItem key={type.value} value={type.value}>
-                          {type.label} - {type.price}€/nuit
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
+                      <SelectContent>
+                        {accommodationTypes.map((type) => (
+                          <SelectItem key={type.value} value={type.value}>
+                            <div>
+                              <div>{type.label}</div>
+                              <div className="text-xs text-muted-foreground">
+                                À partir de 160€/nuit • Pieds dans l'eau
+                              </div>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
                   </Select>
                   {errors.accommodationType && (
                     <p className="text-sm text-destructive mt-1">{errors.accommodationType}</p>
@@ -456,6 +495,32 @@ export default function Reservation() {
                   <p className="text-sm text-muted-foreground">
                     {Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24))} nuit(s)
                   </p>
+                  
+                  {/* Détail des prix par saison */}
+                  {formData.accommodationType && (
+                    <div className="mt-2 p-2 bg-blue-50 rounded text-xs">
+                      <p className="font-medium text-blue-900 mb-1">Tarification par saison :</p>
+                      {(() => {
+                        const current = new Date(checkInDate);
+                        const end = new Date(checkOutDate);
+                        const nights = Math.ceil((end.getTime() - current.getTime()) / (1000 * 60 * 60 * 24));
+                        const seasons: { [key: string]: number } = {};
+                        
+                        for (let i = 0; i < nights; i++) {
+                          const price = getSeasonalPrice(current);
+                          const season = getSeasonName(price);
+                          seasons[season] = (seasons[season] || 0) + 1;
+                          current.setDate(current.getDate() + 1);
+                        }
+                        
+                        return Object.entries(seasons).map(([season, count]) => (
+                          <div key={season} className="text-blue-700">
+                            {count} nuit{count > 1 ? 's' : ''} en {season}
+                          </div>
+                        ));
+                      })()}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -486,8 +551,15 @@ export default function Reservation() {
                 <p className="text-sm text-muted-foreground">
                   ✓ Annulation gratuite jusqu'à 48h avant l'arrivée<br/>
                   ✓ Confirmation immédiate par email<br/>
-                  ✓ Paiement sécurisé
+                  ✓ Paiement sécurisé<br/>
+                  ✓ Situation exceptionnelle pieds dans l'eau
                 </p>
+                <div className="mt-3 text-xs text-muted-foreground border-t pt-2">
+                  <strong>Tarifs saisonniers :</strong><br/>
+                  • Haute saison (Jul-Août, Noël) : 230€/nuit<br/>
+                  • Moyenne saison : 200€/nuit<br/>
+                  • Basse saison : 160€/nuit
+                </div>
               </div>
             </CardContent>
           </Card>

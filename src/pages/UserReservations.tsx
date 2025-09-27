@@ -33,7 +33,7 @@ interface Reservation {
 
 const accommodationTypes = {
   maison_70m2: "Maison 70m² (5 personnes)",
-  maison_40m2: "Maison 40m² (4 adultes + 2 enfants)",
+  maison_40m2: "Maison 40m² (2 adultes + 3 enfants)",
 };
 
 const statusColors = {
