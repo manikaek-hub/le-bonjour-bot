@@ -43,7 +43,7 @@ serve(async (req) => {
       .select('role')
       .eq('user_id', user.id)
       .eq('role', 'admin')
-      .single();
+      .maybeSingle();
 
     if (!userRole) {
       throw new Error("Access denied: Admin role required");
