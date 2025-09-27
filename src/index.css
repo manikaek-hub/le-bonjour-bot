@@ -8,50 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Natural Cotentin Color Palette */
-    --background: 0 0% 100%;
-    --foreground: 216 12% 8%;
+    /* Palette Naturelle & Tendance */
+    --background: 40 25% 97%;
+    --foreground: 210 15% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 216 12% 8%;
+    --card: 40 25% 97%;
+    --card-foreground: 210 15% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 216 12% 8%;
+    --popover: 40 25% 97%;
+    --popover-foreground: 210 15% 12%;
 
-    /* Ocean & Nature inspired colors */
-    --primary: 200 84% 48%;
-    --primary-foreground: 0 0% 98%;
-    --primary-glow: 195 100% 65%;
+    /* Bleu profond principal */
+    --primary: 210 80% 25%;
+    --primary-foreground: 40 25% 97%;
+    --primary-glow: 210 60% 35%;
 
-    /* Soft neutrals */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 216 12% 15%;
+    /* Beige sable doux */
+    --secondary: 40 20% 88%;
+    --secondary-foreground: 210 15% 15%;
 
-    /* Light grays */
-    --muted: 210 15% 95%;
-    --muted-foreground: 216 8% 46%;
+    /* Tons neutres beiges */
+    --muted: 40 15% 92%;
+    --muted-foreground: 210 8% 45%;
 
-    /* Nature accent */
-    --accent: 142 76% 73%;
-    --accent-foreground: 216 12% 15%;
+    /* Vert sauge naturel */
+    --accent: 120 20% 60%;
+    --accent-foreground: 210 15% 15%;
+
+    /* Jaune moutarde audacieux */
+    --mustard: 45 85% 50%;
+    --mustard-foreground: 210 15% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 15% 88%;
-    --input: 210 15% 88%;
-    --ring: 200 84% 48%;
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 210 80% 25%;
 
-    /* Natural gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(200 84% 48%), hsl(195 100% 65%));
-    --gradient-nature: linear-gradient(135deg, hsl(142 76% 73%), hsl(120 60% 60%));
-    --gradient-sunset: linear-gradient(135deg, hsl(35 100% 70%), hsl(25 95% 65%));
-    --gradient-soft: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 15% 98%));
+    /* Gradients naturels */
+    --gradient-ocean: linear-gradient(135deg, hsl(210 80% 25%), hsl(210 60% 35%));
+    --gradient-nature: linear-gradient(135deg, hsl(120 20% 60%), hsl(120 25% 45%));
+    --gradient-sunset: linear-gradient(135deg, hsl(45 85% 50%), hsl(35 80% 55%));
+    --gradient-soft: linear-gradient(180deg, hsl(40 25% 97%), hsl(40 20% 94%));
 
-    /* Soft shadows */
-    --shadow-soft: 0 1px 3px hsl(216 12% 8% / 0.1), 0 1px 2px hsl(216 12% 8% / 0.06);
-    --shadow-medium: 0 4px 6px hsl(216 12% 8% / 0.07), 0 2px 4px hsl(216 12% 8% / 0.06);
-    --shadow-large: 0 10px 15px hsl(216 12% 8% / 0.1), 0 4px 6px hsl(216 12% 8% / 0.05);
+    /* Ombres douces beiges */
+    --shadow-soft: 0 1px 3px hsl(210 15% 12% / 0.08), 0 1px 2px hsl(210 15% 12% / 0.04);
+    --shadow-medium: 0 4px 6px hsl(210 15% 12% / 0.06), 0 2px 4px hsl(210 15% 12% / 0.04);
+    --shadow-large: 0 10px 15px hsl(210 15% 12% / 0.08), 0 4px 6px hsl(210 15% 12% / 0.03);
     
     /* Smooth animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,44 +75,51 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Dark mode - Natural Night */
-    --background: 216 12% 8%;
-    --foreground: 0 0% 98%;
+    /* Mode sombre naturel */
+    --background: 210 15% 8%;
+    --foreground: 40 25% 95%;
 
-    --card: 216 12% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 210 15% 10%;
+    --card-foreground: 40 25% 95%;
 
-    --popover: 216 12% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 210 15% 10%;
+    --popover-foreground: 40 25% 95%;
 
-    --primary: 195 100% 65%;
-    --primary-foreground: 216 12% 8%;
-    --primary-glow: 200 84% 48%;
+    /* Bleu profond adapté */
+    --primary: 210 60% 45%;
+    --primary-foreground: 210 15% 8%;
+    --primary-glow: 210 50% 55%;
 
-    --secondary: 216 8% 15%;
-    --secondary-foreground: 0 0% 98%;
+    /* Beige sombre */
+    --secondary: 40 15% 18%;
+    --secondary-foreground: 40 25% 95%;
 
-    --muted: 216 8% 15%;
-    --muted-foreground: 216 8% 65%;
+    --muted: 210 10% 15%;
+    --muted-foreground: 40 10% 65%;
 
-    --accent: 142 60% 50%;
-    --accent-foreground: 0 0% 98%;
+    /* Vert sauge sombre */
+    --accent: 120 15% 45%;
+    --accent-foreground: 40 25% 95%;
+
+    /* Moutarde sombre */
+    --mustard: 45 70% 35%;
+    --mustard-foreground: 40 25% 95%;
 
     --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 40 25% 95%;
 
-    --border: 216 8% 15%;
-    --input: 216 8% 15%;
-    --ring: 195 100% 65%;
+    --border: 210 10% 18%;
+    --input: 210 10% 18%;
+    --ring: 210 60% 45%;
     
-    --sidebar-background: 216 12% 8%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 195 100% 65%;
-    --sidebar-primary-foreground: 216 12% 8%;
-    --sidebar-accent: 216 8% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 216 8% 15%;
-    --sidebar-ring: 195 100% 65%;
+    --sidebar-background: 210 15% 8%;
+    --sidebar-foreground: 40 25% 95%;
+    --sidebar-primary: 210 60% 45%;
+    --sidebar-primary-foreground: 210 15% 8%;
+    --sidebar-accent: 210 10% 15%;
+    --sidebar-accent-foreground: 40 25% 95%;
+    --sidebar-border: 210 10% 18%;
+    --sidebar-ring: 210 60% 45%;
   }
 }
 
