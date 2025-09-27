@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import HeroSection from "@/components/HeroSection";
 import LocalDiscoveriesSection from "@/components/LocalDiscoveriesSection";
 import EventsSection from "@/components/EventsSection";
@@ -8,21 +9,30 @@ import RegionSection from "@/components/RegionSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import StructuredData from "@/components/StructuredData";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <HeroSection />
-      <AccommodationSection />
-      <LocalDiscoveriesSection />
-      <EventsSection />
-      <WhyChooseUsSection />
-      <TestimonialsSection />
-      <RegionSection />
-      <FAQSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <>
+      <Helmet>
+        <title>FortJoret Resort - Fermanville, Normandie | Hébergement de Luxe Face à la Mer</title>
+        <meta name="description" content="Découvrez FortJoret Resort à Fermanville, votre refuge de luxe en Normandie. Suites panoramiques face à la Manche, architecture normande authentique." />
+      </Helmet>
+      <StructuredData />
+      
+      <main className="min-h-screen bg-background">
+        <HeroSection />
+        <AccommodationSection />
+        <LocalDiscoveriesSection />
+        <EventsSection />
+        <WhyChooseUsSection />
+        <TestimonialsSection />
+        <RegionSection />
+        <FAQSection />
+        <ContactSection />
+        <Footer />
+      </main>
+    </>
   );
 };
 

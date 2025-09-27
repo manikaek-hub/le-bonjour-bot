@@ -3,11 +3,17 @@ import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 
 const HeroSection = () => {
   return (
-    <section id="accueil" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      id="accueil" 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      aria-label="Section d'accueil du FortJoret Resort"
+    >
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${seaViewFermanville})` }}
+        role="img"
+        aria-label="Vue panoramique sur la mer depuis Fermanville en Normandie"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/10"></div>
       </div>
@@ -26,17 +32,32 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button variant="ocean" size="xl" className="min-w-[200px] animate-pulse-glow">
+          <Button 
+            variant="ocean" 
+            size="xl" 
+            className="min-w-[200px] animate-pulse-glow"
+            aria-label="Réserver votre séjour au FortJoret Resort maintenant"
+          >
             Réserver Maintenant
           </Button>
-          <Button variant="coastal" size="xl" className="min-w-[200px]">
+          <Button 
+            variant="coastal" 
+            size="xl" 
+            className="min-w-[200px]"
+            aria-label="Découvrir le FortJoret Resort et ses services"
+          >
             Découvrir
           </Button>
         </div>
       </div>
       
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+        aria-label="Faire défiler vers le bas pour découvrir plus de contenu"
+        role="button"
+        tabIndex={0}
+      >
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
         </div>

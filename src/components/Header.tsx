@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut, User, Shield, Menu } from "lucide-react";
+import { LogOut, User, Shield, Menu, X } from "lucide-react";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,11 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
   const { isAdmin } = useAdmin();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 transition-all duration-300">
@@ -25,7 +32,7 @@ const Header = () => {
             <h1 className="text-xl font-bold text-foreground">FortJoret Resort</h1>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navigation principale">
             <a href="#accueil" className="text-muted-foreground hover:text-primary transition-colors">
               Accueil
             </a>
@@ -41,6 +48,56 @@ const Header = () => {
             <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
               Contact
             </a>
+          </nav>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" aria-label="Menu de navigation">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Navigation mobile">
+                  <a 
+                    href="#accueil" 
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Accueil
+                  </a>
+                  <a 
+                    href="#hebergements" 
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Hébergements
+                  </a>
+                  <a 
+                    href="#galerie" 
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Galerie
+                  </a>
+                  <a 
+                    href="#region" 
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    La Région
+                  </a>
+                  <a 
+                    href="#contact" 
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Contact
+                  </a>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
           
           <div className="flex items-center space-x-4">
