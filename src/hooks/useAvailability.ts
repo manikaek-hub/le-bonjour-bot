@@ -12,10 +12,8 @@ interface UnavailableDate {
 
 // Configuration des capacités par type d'hébergement
 const ACCOMMODATION_CAPACITY = {
-  villa_luxe: 2,        // Maximum 2 villas de luxe
-  suite_familiale: 3,   // Maximum 3 suites familiales
-  chambre_vue_mer: 4,   // Maximum 4 chambres vue mer
-  chambre_standard: 6,  // Maximum 6 chambres standard
+  maison_70m2: 1,    // 1 seule maison de 70m²
+  maison_40m2: 1,    // 1 seule maison de 40m²
 };
 
 export const useAvailability = () => {

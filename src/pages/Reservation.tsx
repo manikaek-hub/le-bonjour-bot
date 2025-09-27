@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 const reservationSchema = z.object({
   checkInDate: z.string().min(1, "Date d'arrivée requise"),
   checkOutDate: z.string().min(1, "Date de départ requise"),
-  guests: z.number().min(1, "Nombre d'invités requis").max(20, "Maximum 20 invités"),
+  guests: z.number().min(1, "Nombre d'invités requis").max(6, "Maximum 6 personnes (4 adultes + 2 enfants)"),
   accommodationType: z.string().min(1, "Type d'hébergement requis"),
   specialRequests: z.string().optional(),
 }).refine((data) => new Date(data.checkInDate) >= new Date(new Date().setHours(0, 0, 0, 0)), {
@@ -32,10 +32,8 @@ const reservationSchema = z.object({
 });
 
 const accommodationTypes = [
-  { value: "villa_luxe", label: "Villa de Luxe", price: 450 },
-  { value: "suite_familiale", label: "Suite Familiale", price: 320 },
-  { value: "chambre_vue_mer", label: "Chambre Vue Mer", price: 280 },
-  { value: "chambre_standard", label: "Chambre Standard", price: 180 },
+  { value: "maison_70m2", label: "Maison 70m² (5 personnes)", price: 120 },
+  { value: "maison_40m2", label: "Maison 40m² (4 adultes + 2 enfants)", price: 80 },
 ];
 
 export default function Reservation() {
@@ -73,8 +71,12 @@ export default function Reservation() {
       newErrors.accommodationType = "Type d'hébergement requis";
     }
     
-    if (formData.guests < 1 || formData.guests > 20) {
-      newErrors.guests = "Nombre d'invités doit être entre 1 et 20";
+    if (formData.guests < 1) {
+      newErrors.guests = "Nombre d'invités requis";
+    } else if (formData.accommodationType === "maison_70m2" && formData.guests > 5) {
+      newErrors.guests = "Maximum 5 personnes pour la maison 70m²";
+    } else if (formData.accommodationType === "maison_40m2" && formData.guests > 6) {
+      newErrors.guests = "Maximum 6 personnes (4 adultes + 2 enfants) pour la maison 40m²";
     }
     
     // Validation des disponibilités
@@ -369,10 +371,15 @@ export default function Reservation() {
                     id="guests"
                     type="number"
                     min="1"
-                    max="20"
+                    max={formData.accommodationType === "maison_70m2" ? "5" : formData.accommodationType === "maison_40m2" ? "6" : "6"}
                     value={formData.guests}
                     onChange={(e) => handleInputChange("guests", parseInt(e.target.value) || 1)}
                   />
+                  {formData.accommodationType && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {formData.accommodationType === "maison_70m2" ? "Maximum 5 personnes" : "Maximum 6 personnes (4 adultes + 2 enfants)"}
+                    </p>
+                  )}
                   {errors.guests && (
                     <p className="text-sm text-destructive mt-1">{errors.guests}</p>
                   )}

@@ -32,10 +32,8 @@ interface Reservation {
 }
 
 const accommodationTypes = {
-  villa_luxe: "Villa de Luxe",
-  suite_familiale: "Suite Familiale", 
-  chambre_vue_mer: "Chambre Vue Mer",
-  chambre_standard: "Chambre Standard",
+  maison_70m2: "Maison 70m² (5 personnes)",
+  maison_40m2: "Maison 40m² (4 adultes + 2 enfants)",
 };
 
 const statusColors = {
