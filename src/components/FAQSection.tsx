@@ -29,7 +29,7 @@ const FAQSection = () => {
     },
     {
       question: "Y a-t-il des commerces à proximité ?",
-      answer: "Oui, le village de Fermanville dispose de commerces de proximité (boulangerie, épicerie). Pour plus de choix, Cherbourg se trouve à 15 minutes en voiture."
+      answer: "Oui, plusieurs commerces pratiques sont disponibles : Api - Super supérette de Vicq sur Mer (17 Bis Rue de la Mairie, 50330 Vicq-sur-Mer) ouverte 7j/7 avec 700 produits du quotidien, fruits & légumes, produits locaux et frais. Également le Market Saint-Pierre-L'église (rue Des Pavillons, 02 33 54 67 17) ouvert jusqu'à 19h30. Pour plus de choix, Cherbourg se trouve à 15 minutes en voiture."
     },
     {
       question: "Quand ont lieu les marchés locaux ?",
