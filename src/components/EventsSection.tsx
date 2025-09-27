@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Calendar, MapPin, Euro } from "lucide-react";
+import { ExternalLink, Calendar, MapPin, Euro, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
 const events = [
   {
@@ -75,8 +76,22 @@ const categoryColors = {
 };
 
 export default function EventsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const handleEventClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -93,70 +108,106 @@ export default function EventsSection() {
           </p>
         </div>
 
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {events.map((event, index) => (
-            <Card 
-              key={event.title}
-              className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => handleEventClick(event.link)}
+        {/* Events Carousel */}
+        <div className="relative mb-16">
+          {/* Navigation Buttons */}
+          <div className="flex justify-end gap-2 mb-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={scrollLeft}
+              className="w-10 h-10 p-0 rounded-full shadow-medium hover:shadow-large transition-all duration-300"
+              aria-label="Événement précédent"
             >
-              <div className="relative overflow-hidden">
-                <img 
-                  src={event.image}
-                  alt={event.title}
-                  className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge 
-                    variant="secondary" 
-                    className={`${categoryColors[event.category as keyof typeof categoryColors]} border-0`}
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={scrollRight}
+              className="w-10 h-10 p-0 rounded-full shadow-medium hover:shadow-large transition-all duration-300"
+              aria-label="Événement suivant"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Scrollable Container */}
+          <div 
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
+            style={{ 
+              scrollSnapType: 'x mandatory',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
+            {events.map((event, index) => (
+              <Card 
+                key={event.title}
+                className="group cursor-pointer overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:-translate-y-2 animate-fade-in-up flex-shrink-0 w-80"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  scrollSnapAlign: 'start'
+                }}
+                onClick={() => handleEventClick(event.link)}
+              >
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={event.image}
+                    alt={event.title}
+                    className="aspect-video object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge 
+                      variant="secondary" 
+                      className={`${categoryColors[event.category as keyof typeof categoryColors]} border-0`}
+                    >
+                      {event.category}
+                    </Badge>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                      <ExternalLink className="w-4 h-4 text-foreground" />
+                    </div>
+                  </div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-3">
+                    {event.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                    {event.description}
+                  </p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="w-4 h-4" />
+                      <span>{event.dates}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <MapPin className="w-4 h-4" />
+                      <span>{event.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Euro className="w-4 h-4" />
+                      <span>{event.price}</span>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
                   >
-                    {event.category}
-                  </Badge>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
-                    <ExternalLink className="w-4 h-4 text-foreground" />
-                  </div>
-                </div>
-              </div>
-              
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-3">
-                  {event.title}
-                </h3>
-                
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  {event.description}
-                </p>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    <span>{event.dates}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="w-4 h-4" />
-                    <span>{event.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Euro className="w-4 h-4" />
-                    <span>{event.price}</span>
-                  </div>
-                </div>
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
-                >
-                  En savoir plus
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                    En savoir plus
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Call to Action */}
