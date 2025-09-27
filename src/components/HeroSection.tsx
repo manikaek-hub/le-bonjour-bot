@@ -91,23 +91,17 @@ const HeroSection = () => {
                   touchAction: 'manipulation',
                   transition: 'all 0.3s ease'
                 }}
-                onTouchStart={() => {
-                  console.log('TOUCH RÉSERVER BUTTON');
-                }}
                 onTouchEnd={(e) => {
-                  console.log('TOUCH END RÉSERVER');
                   e.preventDefault();
                   setTimeout(() => {
                     window.location.href = '/reservation';
                   }, 100);
                 }}
                 onMouseDown={(e) => {
-                  console.log('MOUSE DOWN RÉSERVER');
                   e.preventDefault();
                   window.location.href = '/reservation';
                 }}
                 onClick={(e) => {
-                  console.log('CLICK RÉSERVER');
                   e.preventDefault();
                   window.location.href = '/reservation';
                 }}
@@ -139,7 +133,6 @@ const HeroSection = () => {
                   touchAction: 'manipulation',
                   transition: 'all 0.3s ease'
                 }}
-                onTouchStart={() => console.log('TOUCH DÉCOUVRIR')}
                 onTouchEnd={() => {
                   const element = document.getElementById('hebergements');
                   if (element) element.scrollIntoView({ behavior: 'smooth' });
