@@ -6,7 +6,7 @@ const RegionSection = () => {
   const attractions = [
     {
       title: "Cherbourg-en-Cotentin",
-      description: "Cité de la Mer, Port militaire, Architecture navale",
+      description: "Cité de l'Océan, Port militaire, Architecture navale",
       distance: "15 min"
     },
     {
@@ -90,7 +90,7 @@ const RegionSection = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Départ directement depuis votre logement vers la côte sauvage. Découvrez les criques secrètes et les panoramas exceptionnels sur la mer.
+                  Départ directement depuis votre logement vers la côte sauvage. Découvrez les criques secrètes et les panoramas exceptionnels sur l'océan.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4" />

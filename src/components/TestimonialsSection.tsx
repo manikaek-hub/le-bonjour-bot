@@ -7,7 +7,7 @@ const TestimonialsSection = () => {
       name: "Marie & Pierre L.",
       location: "Paris",
       rating: 5,
-      comment: "Un séjour absolument magique ! La vue sur la mer est à couper le souffle et l'appartement est décoré avec un goût exquis. Nous reviendrons sans hésiter !",
+      comment: "Un séjour absolument magique ! La vue sur l'océan est à couper le souffle et l'appartement est décoré avec un goût exquis. Nous reviendrons sans hésiter !",
       date: "Septembre 2024"
     },
     {
