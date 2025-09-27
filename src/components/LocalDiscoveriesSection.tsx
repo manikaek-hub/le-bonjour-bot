@@ -4,21 +4,21 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, MapPin, Clock, Star } from "lucide-react";
 import OptimizedImage from "@/components/OptimizedImage";
 
-import restaurantVueOcean from "@/assets/restaurant-vue-mer.jpg";
+import restaurantVueMer from "@/assets/restaurant-vue-mer.jpg";
 import fermeRenouville from "@/assets/ferme-renouville.jpg";
 import phareCapLevi from "@/assets/phare-cap-levi.jpg";
 import maisonRouge from "@/assets/maison-rouge.jpg";
 import maisonGosselin from "@/assets/maison-gosselin.jpg";
-import goelandVueOcean from "@/assets/goeland-vue-mer.jpg";
+import goelandVueMer from "@/assets/goeland-vue-mer.jpg";
 import goelandLogo from "@/assets/goeland-logo.png";
 import villageCotentin from "@/assets/village-cotentin.png";
 
 const localDiscoveries = [
   {
     title: "GOÉLAND 1937",
-    description: "Bistro Océan Resto ☀️🍹🏄‍♂️ - Ambiance décontractée face à l'océan",
+    description: "Bistro Mer Resto ☀️🍹🏄‍♂️ - Ambiance décontractée face à la mer",
     category: "Restaurant",
-    image: goelandVueOcean,
+    image: goelandVueMer,
     logo: goelandLogo,
     link: "#", // Pas de redirection directe
     type: "local",
@@ -50,7 +50,7 @@ const localDiscoveries = [
   },
   {
     title: "La Maison Rouge",
-    description: "Restaurant panoramique vue sur océan à 10 minutes de Cherbourg en Cotentin",
+    description: "Restaurant panoramique vue sur mer à 10 minutes de Cherbourg en Cotentin",
     category: "Gastronomie",
     image: maisonRouge,
     link: "https://www.restaurant-lamaisonrouge.fr/",

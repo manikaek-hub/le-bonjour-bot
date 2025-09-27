@@ -16,7 +16,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>FortJoret Resort - Fermanville, Normandie | Hébergement de Luxe Face à l'Océan</title>
+        <title>FortJoret Resort - Fermanville, Normandie | Hébergement de Luxe Face à la Mer</title>
         <meta name="description" content="Découvrez FortJoret Resort à Fermanville, votre refuge de luxe en Normandie. Suites panoramiques face à la Manche, architecture normande authentique." />
       </Helmet>
       <StructuredData />

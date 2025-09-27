@@ -27,7 +27,7 @@ const StructuredData = () => {
     "amenityFeature": [
       {
         "@type": "LocationFeatureSpecification",
-        "name": "Vue sur océan"
+        "name": "Vue sur mer"
       },
       {
         "@type": "LocationFeatureSpecification", 

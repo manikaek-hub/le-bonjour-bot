@@ -29,7 +29,7 @@ const HeroSection = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${seaViewFermanville})` }}
         role="img"
-        aria-label="Vue panoramique sur l'océan depuis Fermanville en Normandie"
+        aria-label="Vue panoramique sur la mer depuis Fermanville en Normandie"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/10"></div>
       </div>
@@ -44,7 +44,7 @@ const HeroSection = () => {
         </p>
         <p className="text-lg text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed">
           Découvrez l'élégance normande au cœur de la côte du Cotentin. 
-          Un refuge de luxe face à l'océan, où tradition et modernité se rencontrent.
+          Un refuge de luxe face à la mer, où tradition et modernité se rencontrent.
         </p>
         
         {/* Boutons responsive */}
