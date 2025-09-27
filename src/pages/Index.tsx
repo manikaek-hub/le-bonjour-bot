@@ -10,6 +10,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
+import Header from "@/components/Header";
 
 const Index = () => {
   return (
@@ -20,18 +21,21 @@ const Index = () => {
       </Helmet>
       <StructuredData />
       
-      <main className="min-h-screen bg-background">
-        <HeroSection />
-        <AccommodationSection />
-        <LocalDiscoveriesSection />
-        <EventsSection />
-        <WhyChooseUsSection />
-        <TestimonialsSection />
-        <RegionSection />
-        <FAQSection />
-        <ContactSection />
-        <Footer />
-      </main>
+      <div className="relative">
+        <Header />
+        <main className="min-h-screen bg-background">
+          <HeroSection />
+          <AccommodationSection />
+          <LocalDiscoveriesSection />
+          <EventsSection />
+          <WhyChooseUsSection />
+          <TestimonialsSection />
+          <RegionSection />
+          <FAQSection />
+          <ContactSection />
+          <Footer />
+        </main>
+      </div>
     </>
   );
 };

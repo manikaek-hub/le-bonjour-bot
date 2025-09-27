@@ -10,13 +10,23 @@ interface ModernLayoutProps {
 export default function ModernLayout({ children }: ModernLayoutProps) {
   const location = useLocation();
   
-  // Routes where we want to show the sidebar
-  const showSidebar = location.pathname !== "/" || true; // Always show for now
+  // Routes where we want to show the sidebar (admin routes only)
+  const showSidebar = location.pathname.startsWith("/admin");
 
+  if (!showSidebar) {
+    // For homepage and public pages, use simple layout without sidebar
+    return (
+      <div className="min-h-screen w-full bg-background">
+        {children}
+      </div>
+    );
+  }
+
+  // For admin pages, use sidebar layout
   return (
     <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen w-full flex bg-gradient-soft">
-        {showSidebar && <ModernSidebar />}
+        <ModernSidebar />
         
         <div className="flex-1 flex flex-col min-h-screen">
           <ModernHeader />
