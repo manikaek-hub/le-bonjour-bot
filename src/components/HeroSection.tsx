@@ -6,29 +6,19 @@ const HeroSection = () => {
   const title = "FortJoret Resort";
 
   useEffect(() => {
-    // Démarrer l'animation des lettres immédiatement
-    const timer = setTimeout(() => {
+    // Animation simple et fiable
+    const timer = setInterval(() => {
       setVisibleLetters(prev => {
-        if (prev < title.length) {
-          return prev + 1;
+        if (prev >= title.length) {
+          clearInterval(timer);
+          return title.length;
         }
-        return prev;
+        return prev + 1;
       });
-    }, 500); // Délai initial de 500ms avant de commencer
+    }, 100);
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // Animation des lettres
-    if (visibleLetters > 0 && visibleLetters < title.length) {
-      const timer = setTimeout(() => {
-        setVisibleLetters(prev => prev + 1);
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visibleLetters, title.length]);
+    return () => clearInterval(timer);
+  }, [title.length]);
 
   useEffect(() => {
     // Afficher les informations de debug après le chargement
