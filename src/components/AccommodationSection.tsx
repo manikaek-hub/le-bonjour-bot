@@ -266,7 +266,7 @@ const AccommodationSection = () => {
           <div className="space-y-6 md:order-1 flex flex-col h-full min-h-[600px]">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Cabanon authentique au bord de l'eau
+                Cabane authentique au bord de l'eau
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Charmante maison de 55m² spécialement conçue pour les familles avec jeunes enfants. 
