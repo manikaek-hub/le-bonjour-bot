@@ -6,15 +6,18 @@ const HeroSection = () => {
   const title = "FortJoret Resort";
 
   useEffect(() => {
-    // Animation des lettres
-    const timer = setTimeout(() => {
-      if (visibleLetters < title.length) {
-        setVisibleLetters(prev => prev + 1);
+    // Commencer l'animation après un délai initial
+    const startAnimation = async () => {
+      await new Promise(resolve => setTimeout(resolve, 500)); // Attendre 500ms
+      
+      for (let i = 1; i <= title.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 80)); // 80ms entre chaque lettre
+        setVisibleLetters(i);
       }
-    }, 100);
+    };
 
-    return () => clearTimeout(timer);
-  }, [visibleLetters, title.length]);
+    startAnimation();
+  }, [title.length]);
 
   useEffect(() => {
     // Afficher les informations de debug après le chargement
@@ -54,13 +57,13 @@ const HeroSection = () => {
           {title.split('').map((letter, index) => (
             <span
               key={index}
-              className={`inline-block transition-all duration-300 ${
+              className={`inline-block transition-all duration-500 ease-out ${
                 index < visibleLetters 
                   ? 'opacity-100 transform translate-y-0' 
                   : 'opacity-0 transform translate-y-4'
               }`}
               style={{
-                transitionDelay: `${index * 50}ms`
+                transitionDelay: `${index * 80}ms`
               }}
             >
               {letter === ' ' ? '\u00A0' : letter}
