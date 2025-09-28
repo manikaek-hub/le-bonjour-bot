@@ -6,16 +6,21 @@ const HeroSection = () => {
   const title = "FortJoret Resort";
 
   useEffect(() => {
-    // Démarrer l'animation après un court délai
+    // Démarrer l'animation des lettres immédiatement
     const timer = setTimeout(() => {
-      setVisibleLetters(1); // Commencer par montrer la première lettre
-    }, 300);
+      setVisibleLetters(prev => {
+        if (prev < title.length) {
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 500); // Délai initial de 500ms avant de commencer
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Continuer l'animation lettre par lettre
+    // Animation des lettres
     if (visibleLetters > 0 && visibleLetters < title.length) {
       const timer = setTimeout(() => {
         setVisibleLetters(prev => prev + 1);
@@ -63,13 +68,13 @@ const HeroSection = () => {
           {title.split('').map((letter, index) => (
             <span
               key={index}
-              className={`inline-block transition-all duration-500 ease-out ${
+              className={`inline-block transition-all duration-300 ${
                 index < visibleLetters 
                   ? 'opacity-100 transform translate-y-0' 
                   : 'opacity-0 transform translate-y-4'
               }`}
               style={{
-                transitionDelay: `${index * 80}ms`
+                transitionDelay: `${index * 50}ms`
               }}
             >
               {letter === ' ' ? '\u00A0' : letter}
