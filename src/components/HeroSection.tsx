@@ -6,24 +6,18 @@ const HeroSection = () => {
   const title = "FortJoret Resort";
 
   useEffect(() => {
-    // Démarrer l'animation après un court délai
-    const timer = setTimeout(() => {
-      setVisibleLetters(1); // Commencer par montrer la première lettre
-    }, 300);
+    // Commencer l'animation après un délai initial
+    const startAnimation = async () => {
+      await new Promise(resolve => setTimeout(resolve, 500)); // Attendre 500ms
+      
+      for (let i = 1; i <= title.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 80)); // 80ms entre chaque lettre
+        setVisibleLetters(i);
+      }
+    };
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // Continuer l'animation lettre par lettre
-    if (visibleLetters > 0 && visibleLetters < title.length) {
-      const timer = setTimeout(() => {
-        setVisibleLetters(prev => prev + 1);
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [visibleLetters, title.length]);
+    startAnimation();
+  }, [title.length]);
 
   useEffect(() => {
     // Afficher les informations de debug après le chargement
