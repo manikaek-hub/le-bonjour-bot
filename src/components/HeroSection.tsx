@@ -2,23 +2,7 @@ import { useEffect, useState } from "react";
 import seaViewFermanville from "@/assets/sea-view-fermanville.jpg";
 
 const HeroSection = () => {
-  const [visibleLetters, setVisibleLetters] = useState(0);
   const title = "FortJoret Resort";
-
-  useEffect(() => {
-    // Animation simple et fiable
-    const timer = setInterval(() => {
-      setVisibleLetters(prev => {
-        if (prev >= title.length) {
-          clearInterval(timer);
-          return title.length;
-        }
-        return prev + 1;
-      });
-    }, 100);
-
-    return () => clearInterval(timer);
-  }, [title.length]);
 
   useEffect(() => {
     // Afficher les informations de debug après le chargement
@@ -55,21 +39,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto" style={{ pointerEvents: 'auto' }}>
         <h1 className="text-5xl md:text-7xl font-cursive font-bold mb-6 leading-tight bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-200 bg-clip-text text-transparent">
-          {title.split('').map((letter, index) => (
-            <span
-              key={index}
-              className={`inline-block transition-all duration-300 ${
-                index < visibleLetters 
-                  ? 'opacity-100 transform translate-y-0' 
-                  : 'opacity-0 transform translate-y-4'
-              }`}
-              style={{
-                transitionDelay: `${index * 50}ms`
-              }}
-            >
-              {letter === ' ' ? '\u00A0' : letter}
-            </span>
-          ))}
+          {title}
         </h1>
         <p className="text-xl md:text-2xl text-white/90 mb-4 font-light">
           Fermanville, Normandie
